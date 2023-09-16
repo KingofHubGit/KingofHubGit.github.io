@@ -1,14 +1,19 @@
-- name: Programing field
-   keywords:
-    - Java
-    - C++
-    - Python
-    - Matlab
-    - Linux Shell
-
-- name: Developing field
+- name: Software Engineer Keywords
   keywords:
-    - Android Application
-    - Android System
-    - Android Performance
-    - ChatGPT prompt
+      - Java
+      - C++
+      - Python
+      - Design Patterns
+
+- name: Mobile Developer Keywords
+  keywords:
+      - Android
+      - Reverse Engineering
+
+- name: Windows Developer Keywords
+  keywords:
+      - Win32 SDK
+      - DuiLib
+      - WTL
+      - COM
+      - WinDbg
