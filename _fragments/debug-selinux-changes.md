@@ -1,3 +1,18 @@
+---
+layout: fragment
+title: Debug skill of the SEpolicy changes
+tags: [android]
+description: 调试
+keywords: Android, selinux， sepolicy
+mermaid: false
+sequence: false
+flow: false
+mathjax: false
+mindmap: false
+mindmap2: false
+---
+
+
 ### Debug skill of the SEpolicy changes
 
 1. load the build environment

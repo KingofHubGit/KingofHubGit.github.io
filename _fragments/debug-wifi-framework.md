@@ -1,3 +1,18 @@
+---
+layout: fragment
+title: Debug skill of the WiFi framework changes
+tags: [android]
+description: 调试
+keywords: Android, wifi, apex
+mermaid: false
+sequence: false
+flow: false
+mathjax: false
+mindmap: false
+mindmap2: false
+---
+
+
 ### Debug skill of the WiFi framework changes
 
 Suppose you need debug about wifi framework source code, such as frameworks/opt/net/wifi/service/java/com/android/server/wifi/WifiConnectivityManager.java, and you don't want flash system.img every time.
