@@ -1,11 +1,11 @@
-```
+---
 layout: post
 title: Repo Usage
-categories: [Android]
+categories: Android
 description: repo history, creation and usage
-keywords: repo,git,python
+keywords: repo, git, python
 topmost: true
-```
+---
 
 
 
