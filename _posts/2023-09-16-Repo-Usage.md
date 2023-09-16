@@ -11,7 +11,9 @@ topmost: true
 
 ### Basic Introduction
 
-![](../../../OneDrive/Documents/Note/Image/SouthEast.png)
+![img](../images/posts/android/20140114004627265)
+
+
 
 - Repo脚本
 
@@ -35,6 +37,8 @@ repo/docs/windows.md
 
 ```
 
+不太建议使用。
+
 
 
 Google official：
@@ -51,11 +55,7 @@ repo bin
 repo init -u https://android.googlesource.com/platform/manifest
 ```
 
-![Weixin Image_20230912135524](../../../OneDrive/Documents/Note/Image/Weixin%20Image_20230912135524.png)![image-20230913095052148](../../../OneDrive/Documents/Note/Image/image-20230913095052148.png)
 
-
-
-   
 
 如果Repo脚本所在的目录存在一个Repo仓库，那么要满足以下条件：
 
@@ -104,8 +104,6 @@ XmlManifest作了描述了AOSP的Repo目录（repodir）、AOSP 根目录（topd
 还使用两个MetaProject对象描述了AOSP的Repo仓库（repoProject）和Manifest仓库（manifestProject）。
 
 
-
-![Picture1](../../../OneDrive/Documents/Note/Image/Picture1.png)
 
 .repo/repo/project.py
 
@@ -259,7 +257,6 @@ following DTD:
   <!ELEMENT include EMPTY>
   <!ATTLIST include name CDATA #REQUIRED>
 ]>
-```
 
 A description of the elements and their attributes follows.
 
@@ -542,25 +539,30 @@ above.
 
 If `$TOP_DIR/.repo/local_manifest.xml` exists, it will be loaded before
 any manifest files stored in `$TOP_DIR/.repo/local_manifests/*.xml`.
-````
+```
 
 
 
-中文
+元素中文含义
 
-​```markdown
-Element manifest
+````markdown
+Manifest解析
+
+## Element manifest
 manifest：文件的根元素。
-Element notice
+
+## Element notice
 完成时向用户显示的任意文本repo sync。内容只是通过它存在于清单中。
-Element remote
+
+## Element remote
 属性name：此清单文件唯一的短名称。此处指定的名称用作每个项目的 .git/config 中的远程名称，因此自动可用于git fetch、git remote和git pull等命令git push。
 属性alias：别名（如果指定）用于覆盖name以在每个项目的 .git/config 中设置为远程名称。它的值可以重复，而属性name在清单文件中必须是唯一的。这有助于每个项目能够具有相同的远程名称，该名称实际上指向不同的远程 url。
 属性fetch：使用此远程的所有项目的 Git URL 前缀。每个项目的名称都附加到此前缀以形成用于克隆项目的实际 URL。
 属性pushurl：使用此远程的所有项目的 Git“推送”URL 前缀。每个项目的名称都附加到此前缀，以形成用于“git push”项目的实际 URL。这个属性是可选的；如果未指定，则“git push”将使用与属性相同的 URL fetch。
 属性review：上传到的 Gerrit 服务器的主机名repo upload。这个属性是可选的；如果未指定，repo upload则将不起作用。
 属性revision：Git 分支的名称（例如main或refs/heads/main）。具有自己版本的遥控器将覆盖默认版本。
-Element default
+
+## Element default
 属性remote：先前定义的远程元素的名称。缺少自己的远程属性的项目元素将使用此远程。
 属性revision：Git 分支的名称（例如main或refs/heads/main）。缺少自己的修订属性的项目元素将使用此修订。
 属性dest-branch：Git 分支的名称（例如main）。未设置自己的项目元素dest-branch将继承此值。如果未设置此值，项目将revision默认使用。
@@ -569,17 +571,18 @@ Element default
 属性sync-c：设置为 true 以仅同步给定的 Git 分支（在revision属性中指定）而不是整个引用空间。缺少自己的 sync-c 元素的项目元素将使用此值。
 属性sync-s：设置为 true 也同步子项目。
 属性sync-tags：设置为 false 以仅同步给定的 Git 分支（在属性中指定revision）而不是其他 ref 标记。
-Element manifest-server
+
+## Element manifest-server
 最多可以指定一个清单服务器。url 属性用于指定清单服务器的 URL，它是一个 XML RPC 服务。
 
 清单服务器应实现以下 RPC 方法：
-
 GetApprovedManifest(branch, target)
 返回一个清单，其中每个项目都与当前分支和目标的已知良好修订挂钩。当给出 --smart-sync 选项时，repo sync 使用它。
 要使用的目标由环境变量 TARGET_PRODUCT 和 TARGET_BUILD_VARIANT 定义。这些变量用于创建 $TARGET_PRODUCT-$TARGET_BUILD_VARIANT 形式的字符串，例如 passion-userdebug。如果这些变量之一或两者都不存在，程序将调用不带目标参数的 GetApprovedManifest，清单服务器应选择一个合理的默认目标。
 GetManifest(tag)
 返回一个清单，其中每个项目都与指定标记处的修订挂钩。当给出 --smart-tag 选项时，repo sync 使用它。
-Element submanifest
+
+## Element submanifest
 属性name：此子清单的唯一名称（在当前（子）清单中）。它作为revision下面的默认值。相同的名称可用于具有不同父（子）清单的子清单。
 属性remote：先前定义的远程元素的名称。如果未提供，则使用默认元素给出的远程。
 属性project：清单项目名称。项目的名称附加到其远程的获取 URL 以生成实际的 URL 来配置 Git 远程。URL 的格式如下：
@@ -594,7 +597,8 @@ project不能为空，不能是绝对路径或使用“.” 或“..”路径组
 属性path：相对于 repo 客户端顶级目录的可选路径，子清单 repo 客户端顶级目录应放置在该目录中。如果未提供，revision则使用。path可能不是绝对路径或使用“.” 或“..”路径组件。
 属性groups：包含的子清单中的所有项目所属的附加组的列表。这会追加和递归，这意味着子清单中的所有项目都带有所有父子清单组。与 的相应元素相同的语法project。
 属性default-groups：如果在初始化时未指定参数，则要同步的清单组列表--groups=。当该列表为空时，使用此列表而不是“默认”作为要同步的组列表。
-Element project
+
+## Element project
 可以指定一个或多个项目元素。每个元素都描述了一个要克隆到 repo 客户端工作区中的 Git 存储库。您可以通过创建嵌套项目来指定 Git-submodules。Git 子模块将被自动识别并继承其父模块的属性，但这些模块可能会被明确指定的项目元素覆盖。
 
 属性name：此项目的唯一名称。项目的名称附加到其远程的获取 URL 以生成实际的 URL 来配置 Git 远程。URL 的格式如下：
@@ -612,7 +616,8 @@ ${remote_fetch}/${project_name}.git
 属性upstream：可以在其中找到 sha1 的 Git 引用的名称。在 -c 模式下同步修订锁定清单时使用，以避免必须同步整个引用空间。
 属性clone-depth：设置获取此项目时要使用的深度。如果指定，此值将覆盖在命令行上使用 --depth 选项提供给 repo init 的任何值。
 属性force-path：设置为 true 以强制此项目根据其path属性（如果提供）而不是name属性创建本地镜像存储库。此属性仅适用于本地镜像同步，在客户端工作目录中同步项目时将被忽略。
-Element extend-project
+
+## Element extend-project
 修改命名项目的属性。 此元素在本地清单文件中最有用，可在不完全替换现有项目定义的情况下修改现有项目的属性。这使得本地清单对原始清单的更改更加健壮。
 
 属性path：如果指定，则将更改限制为在指定路径签出的项目，而不是具有给定名称的所有项目。
@@ -622,8 +627,11 @@ Element extend-project
 属性remote：如果指定，则覆盖原始项目的远程。与 的相应元素相同的语法project。
 属性dest-branch：如果指定，将覆盖原始项目的目标分支。与 的相应元素相同的语法project。
 属性upstream：如果指定，则覆盖原始项目的上游。与 的相应元素相同的语法project。
-Element annotation
-可以将零个或多个注释元素指定为项目或远程元素的子元素。每个元素描述一个名称-值对。对于项目，此名称-值对将在“forall”命令期间导出到每个项目的环境中，前缀为REPO__. 此外，还有一个可选属性“keep”，它接受不区分大小写的值“true”（默认）或“false”。此属性确定在使用 manifest 子命令导出时是否保留注释。
+
+## Element annotation
+可以将零个或多个注释元素指定为项目或远程元素的子元素。每个元素描述一个名称-值对。对于项目，此名称-值对将在“forall”命令期间导出到每个项目的环境中，前缀为REPO__
+
+此外，还有一个可选属性“keep”，它接受不区分大小写的值“true”（默认）或“false”。此属性确定在使用 manifest 子命令导出时是否保留注释。
 Element copyfile
 可以将零个或多个 copyfile 元素指定为项目元素的子元素。每个元素描述一对 src-dest 文件；“src”文件将在repo sync命令期间被复制到“dest”位置。
 “src”是相对于项目的，“dest”是相对于树的顶部的。不允许从项目外部的路径复制或复制到 repo 客户端外部的路径。
@@ -634,11 +642,13 @@ Element linkfile
 符号链接在“dest”（相对于树的顶部）创建，并指向“src”指定的路径，这是项目中的路径。
 如果缺少，将自动创建“dest”的父目录。
 符号链接目标可以是文件或目录，但它不能指向 repo 客户端之外。
-Element remove-project
+
+## Element remove-project
 从内部清单表中删除命名项目，可能允许同一清单文件中的后续项目元素用不同的源替换项目。
 此元素在本地清单文件中最有用，用户可以在其中删除项目，并可能用自己的定义替换它。
 属性optional：设置为 true 以忽略没有匹配project元素的 remove-project 元素。
-Element repo-hooks
+
+## Element repo-hooks
 一次只能指定一个 repo-hooks 元素。
 
 属性in-project：定义repo-hooks 的项目。该值必须与先前定义的元素的name属性（而不是属性path）相匹配project。
@@ -647,7 +657,8 @@ Element superproject
 属性name：超级项目的唯一名称。该属性与项目的名称属性含义相同。
 属性remote：先前定义的远程元素的名称。如果未提供，则使用默认元素给出的远程。
 属性revision：清单要为此超级项目跟踪的 Git 分支的名称。如果未提供，则使用远程元素给出的修订版（如果适用），否则使用默认元素。
-Element contactinfo
+
+## Element contactinfo
 此元素用于让清单作者自行注册联系信息。它具有“bugurl”作为必需的属性。这个元素可以重复，任何后面的条目都会破坏前面的条目。这将允许扩展清单的清单作者指定他们自己的联系信息。
 
 属性bugurl：针对清单所有者提交错误的 URL。
@@ -656,10 +667,10 @@ Element include
 
 属性name：要包含的清单，相对于清单存储库的根指定。“名称”可以不是绝对路径或使用“.” 或“..”路径组件。不对Local Manifests强制执行这些限制。
 属性groups：包含的清单中的所有项目所属的附加组的列表。这会追加和递归，这意味着包含清单中的所有项目都带有所有父包含组。与 的相应元素相同的语法project。
------------------------------------
-©著作权归作者所有：来自51CTO博客作者小吉猫w的原创作品，请联系作者获取转载授权，否则将追究法律责任
-repo manifest.xml
-https://blog.51cto.com/wangguishe/6145033
+
+官方文档：
+https://github.com/GerritCodeReview/git-repo/blob/main/docs/manifest-format.md
+
 ```
 
 
@@ -806,10 +817,6 @@ repo prune [<project>...]
 对git branch -d 命令的封装
 ```
 
-![Picture2](../../../OneDrive/Documents/Note/Image/Picture2.png)
-
-
-
 
 
 ```
@@ -823,14 +830,6 @@ repo abandon <branchname> [<rpoject>...]
 repo status [<project>...]
 
 ```
-
-
-
-![image-20230913165318769](../../../OneDrive/Documents/Note/Image/image-20230913165318769.png)
-
-
-
-![image-20230913165303097](../../../OneDrive/Documents/Note/Image/image-20230913165303097.png)
 
 
 
@@ -895,7 +894,7 @@ repo manifest [-o {-|NAME.xml} [-r]]
 
 
 
-### Applying Case
+### Use Case
 
 
 
