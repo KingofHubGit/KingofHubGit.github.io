@@ -2,7 +2,7 @@
 #   Main Configs   #
 # ---------------- #
 baseurl:
-url: https://kingofhubgit.github.io/
+url: https://kingofhubgit.github.io
 date_format: "ordinal"
 title: Lucas.D
 subtitle: "Lucas.D's Blog"
