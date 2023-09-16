@@ -5,7 +5,7 @@ baseurl:
 url: https://kingofhubgit.github.io
 date_format: "ordinal"
 title: Lucas.D
-subtitle: "Lucas.D's Blog v1.0.0"
+subtitle: "Lucas.D's Blog"
 description: "Lucas.D的个人博客"
 keywords: Lucas.D, Android System, Linux, Android Performance
 timezone: Asia/Shanghai
@@ -88,7 +88,7 @@ navs:
 
   -
     href: /fragments/
-    label: 碎点
+    label: 碎片
 
   -
     href: /wiki/

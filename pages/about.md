@@ -2,13 +2,16 @@
 layout: page
 title: About
 description: 外企摸鱼程序员
-keywords: Lucas.D
+keywords: Lucas.D, dengtonglong
 comments: true
 menu: 关于
 permalink: /about/
 ---
 
-我是Lucas.D, 外企摸鱼程序员
+- 水硕毕业，从事Android系统开发6年，曾就职于某知名手机公司，现工作于某垂直领域头部小外企。
+- 上架干货，记录碎片，各位大佬多指点！
+- v1.0.1
+
 
 ## 联系
 

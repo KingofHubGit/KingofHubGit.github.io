@@ -1,24 +1,27 @@
+- sitename: 个人主页
+  name: Lucas.D
+  url: https://kingofhubgit.github.io/
+
 - sitename: GitHub
-  name: Lucas.D
-  url: https://github.com/mzlogin
-
-- sitename: 掘金
-  name: Lucas.D
-  url: http://gold.xitu.io/user/570ddaeb2e958a005c63b2da
-
-- sitename: LinkedIn
-  name: Lucas.D
-  url: https://www.linkedin.com/in/mazhuang
-
-- sitename: 博客
-  name: Lucas.D
-  url: http://mazhuang.org
+  name: KingofHubGit
+  url: https://github.com/KingofHubGit
 
 - sitename: CSDN
-  name: Lucas.D
-  url: http://weibo.com/mzlogin
+  name: Lucas.Deng
+  url: https://blog.csdn.net/dengtonglong
+
+- sitename: 掘金
+  name: LucasD
+  url: https://juejin.cn/user/3362755788151736
 
 - sitename: 知乎
   name: Lucas.D
-  url: http://www.zhihu.com/people/mzlogin
+  url: https://www.zhihu.com/people/lucas.deng 
+
+- sitename: 公众号
+  name: Lucas-Den
+  url: https://www.zhihu.com/people/lucas.deng
+
+
+
 

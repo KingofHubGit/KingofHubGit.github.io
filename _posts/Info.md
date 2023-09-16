@@ -1,0 +1,64 @@
+## 账号：
+
+Lucas.D | LucasD | Lucas.Deng
+
+
+
+### 平台：
+
+- 个人主页：https://kingofhubgit.github.io/
+- GitHub：https://github.com/KingofHubGit
+- CSDN：https://blog.csdn.net/dengtonglong
+
+- 掘金：https://juejin.cn/user/3362755788151736
+
+- 知乎：https://www.zhihu.com/people/lucas.deng
+
+  de****@gmail.com
+
+  +86190****1337
+
+- 公众号：Lucas-Den
+
+
+
+### 个人简介：
+
+- 水硕毕业，从事Android系统开发6年，曾就职于某知名手机公司，现工作于某垂直领域头部小外企。
+- 上架干货，记录碎片，各位大佬多指点！
+
+## 技术栈：
+
+Programing field
+
+- Java
+- C++
+- Python
+- Matlab
+- Linux Shell
+
+
+
+Developing field
+
+- Android Application
+- Android System
+- Android Performance
+- ChatGPT prompt
+
+
+
+## 分类：
+
+- Android
+- Linux
+- Tools
+- English
+- Life
+
+
+
+
+
+
+
