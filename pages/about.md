@@ -20,7 +20,6 @@ permalink: /about/
 {% endfor %}
 {% if site.url contains 'kingofhubgit' %}
 <li>
-<br />
 <img style="height:192px;width:192px;border:1px solid lightgrey;" src="{{ site.url }}/assets/images/qrcode.jpg" alt="Lucas.D" />
 </li>
 {% endif %}

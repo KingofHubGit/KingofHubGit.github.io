@@ -76,3 +76,32 @@ Developing field
     - Android System
     - Android Performance
     - ChatGPT prompt
+
+
+Client ID
+60dc43714dd19fa99c7c
+
+Client secrets
+d2e7b487e1b92797a09d5e63dcac704d57d0f7c6
+
+blog-comments
+
+
+<script src="https://giscus.app/client.js"
+        data-repo="KingofHubGit/blog-comments"
+        data-repo-id="R_kgDOKUZ9UQ"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOKUZ9Uc4CZXsm"
+        data-mapping="og:title"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
+
+
+
