@@ -1,7 +1,7 @@
 ---
 layout: post
 title: template page
-categories: [cate1, cate2]
+categories: Excel
 description: some word here
 keywords: keyword1, keyword2
 ---

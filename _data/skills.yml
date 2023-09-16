@@ -3,17 +3,12 @@
       - Java
       - C++
       - Python
-      - Design Patterns
+      - Linux Shell
 
 - name: Mobile Developer Keywords
   keywords:
-      - Android
-      - Reverse Engineering
+      - Android System
+      - Android Application
+      - Android Performance
 
-- name: Windows Developer Keywords
-  keywords:
-      - Win32 SDK
-      - DuiLib
-      - WTL
-      - COM
-      - WinDbg
+

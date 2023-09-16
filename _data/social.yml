@@ -1,27 +1,24 @@
 - sitename: GitHub
-  name: mzlogin
+  name: Lucas.D
   url: https://github.com/mzlogin
 
 - sitename: 掘金
-  name: mzlogin
+  name: Lucas.D
   url: http://gold.xitu.io/user/570ddaeb2e958a005c63b2da
 
 - sitename: LinkedIn
-  name: mazhuang
+  name: Lucas.D
   url: https://www.linkedin.com/in/mazhuang
 
 - sitename: 博客
-  name: 码志
+  name: Lucas.D
   url: http://mazhuang.org
 
-- sitename: 微博
-  name: mzlogin
+- sitename: CSDN
+  name: Lucas.D
   url: http://weibo.com/mzlogin
 
 - sitename: 知乎
-  name: mzlogin
+  name: Lucas.D
   url: http://www.zhihu.com/people/mzlogin
 
-- sitename: 豆瓣
-  name: 闷骚的程序员
-  url: http://www.douban.com/people/freedim

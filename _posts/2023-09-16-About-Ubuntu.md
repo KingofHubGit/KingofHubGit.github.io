@@ -1,6 +1,6 @@
 ---
-layout: Ubuntu
-title: template page
+layout: post
+title: Ubuntu
 categories: Excel
 description: some word here
 keywords: keyword1, keyword2
