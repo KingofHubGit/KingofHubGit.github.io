@@ -1,13 +1,13 @@
 ---
-layout: patch
-title: template page
+layout: post
+title: modify patch
 categories: Excel
 description: some word here
 keywords: keyword1, keyword2
 ---
 
 
-### 鍏抽棴寮€鏈哄悜瀵?
+### 閸忔娊妫村鈧張鍝勬倻鐎?
 ```
 adb shell settings put secure user_setup_complete 1
 
@@ -70,7 +70,7 @@ index d882eda..95c98e2 100644
 
 
 
-### usb debug榛樿寮€鍚?
+### usb debug姒涙顓诲鈧崥?
 ```shell
 diff --git a/core/main.mk b/core/main.mk
 index c8ffe2d8e..05f8fdcce 100644
@@ -111,7 +111,7 @@ index c8ffe2d8e..05f8fdcce 100644
 
 
 
-### 寮€鍙戣€呮ā寮忛粯璁ゅ紑鍚?
+### 瀵偓閸欐垼鈧懏膩瀵繘绮拋銈呯磻閸?
 ```
 adb shell settings put global  development_settings_enabled  1
 ```
@@ -137,7 +137,7 @@ index b191f888aa1..43c1e2e67c4 100644
 
 
 
-### pre dex 鍏抽棴
+### pre dex 閸忔娊妫?
 
 ```shell
 diff --git a/core/board_config.mk b/core/board_config.mk
@@ -210,10 +210,10 @@ index d877ec10d..80e8c152d 100644
 
 
 
-### root榛樿寮€鍚?
+### root姒涙顓诲鈧崥?
 
 
-### selinux鍏抽棴
+### selinux閸忔娊妫?
 
 ```
 diff --git a/alps/system/core/init/selinux.cpp b/alps/system/core/init/selinux.cpp
@@ -234,20 +234,20 @@ index ce8348e..1b87d60 100644
 
 
 
-### 鍏抽棴DM Verity
+### 閸忔娊妫碊M Verity
 
-涓€銆佸叧闂璂M Verity锛?
-鍦?alps/vendor/mediatek/proprietary/bootable/bootloader/lk/platform/$(PLATFORM)/rules.mk 涓?
-灏嗭細
+娑撯偓閵嗕礁鍙ч梻鐠侻 Verity閿?
+閸?alps/vendor/mediatek/proprietary/bootable/bootloader/lk/platform/$(PLATFORM)/rules.mk 娑?
+鐏忓棴绱?
 
     ifeq ($(MTK_DM_VERITY_OFF),yes)
         DEFINES += MTK_DM_VERITY_OFF
     endif
 
-鏀逛负寮哄埗瀹氫箟 MTK_DM_VERITY_OFF锛?
+閺€閫涜礋瀵搫鍩楃€规矮绠?MTK_DM_VERITY_OFF閿?
         DEFINES += MTK_DM_VERITY_OFF
 
-涔熷彲浠ユ敼鎴愶紝浠匘ebug鐗堟湰鎵嶅畾涔塎TK_DM_VERITY_OFF锛?
+娑旂喎褰叉禒銉︽暭閹存劧绱濇禒鍖榚bug閻楀牊婀伴幍宥呯暰娑斿TK_DM_VERITY_OFF閿?
 ifeq ($(strip $(TARGET_BUILD_VARIANT)),user)
     ifeq ($(MTK_DM_VERITY_OFF),yes)
         DEFINES += MTK_DM_VERITY_OFF
@@ -256,12 +256,12 @@ else
     DEFINES += MTK_DM_VERITY_OFF
 endif
 
-淇敼鍚巖ebuild锛屼細鍙戠幇鍦ㄥ紑鏈篖ogo鐣岄潰鎻愮ず锛歒our device has been unlocked and can't be trusted
+娣囶喗鏁奸崥宸杄build閿涘奔绱伴崣鎴犲箛閸︺劌绱戦張绡杘go閻ｅ矂娼伴幓鎰仛閿涙瓛our device has been unlocked and can't be trusted
 
-璇存槑宸茬粡淇敼鎴愬姛浜嗐€?
-浣嗘槸鐩墠杩樹笉鑳芥甯歌皟璇曪紝鎴戜滑浼氬彂鐜伴€氳繃 adb push鏂囦欢鍒皊ystem鍒嗗尯涔嬪悗涓€鏃﹂噸鍚紝push鐨勬枃浠朵細琚嚜鍔ㄦ仮澶?
+鐠囧瓨妲戝鑼病娣囶喗鏁奸幋鎰娴滃棎鈧?
+娴ｅ棙妲搁惄顔煎鏉╂ü绗夐懗鑺ヮ劀鐢瓕鐨熺拠鏇礉閹存垳婊戞导姘絺閻滀即鈧俺绻?adb push閺傚洣娆㈤崚鐨妝stem閸掑棗灏稊瀣倵娑撯偓閺冿箓鍣搁崥顖ょ礉push閻ㄥ嫭鏋冩禒鏈电窗鐞氼偉鍤滈崝銊︿划婢?
 
-鏄洜涓哄钩鍙扮殑secure boot鏈哄埗锛屽system鍒嗗尯鏈夊啓淇濇姢锛屽鑷存棤娉曞system杩涜鍐欏叆锛屽彧闇€瑕佸皢璇ュ姛鑳藉叧鎺夊嵆鍙€?鈥斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€?鐗堟潈澹版槑锛氭湰鏂囦负CSDN鍗氫富銆宎mlinsan銆嶇殑鍘熷垱鏂囩珷锛岄伒寰狢C 4.0 BY-SA鐗堟潈鍗忚锛岃浆杞借闄勪笂鍘熸枃鍑哄閾炬帴鍙婃湰澹版槑銆?鍘熸枃閾炬帴锛歨ttps://blog.csdn.net/amlinsan/article/details/121038991
+閺勵垰娲滄稉鍝勯挬閸欐壆娈憇ecure boot閺堝搫鍩楅敍灞筋嚠system閸掑棗灏張澶婂晸娣囨繃濮㈤敍灞筋嚤閼峰瓨妫ゅ▔鏇烆嚠system鏉╂稖顢戦崘娆忓弳閿涘苯褰ч棁鈧憰浣哥殺鐠囥儱濮涢懗钘夊彠閹哄宓嗛崣顖樷偓?閳ユ柡鈧柡鈧柡鈧柡鈧柡鈧柡鈧柡鈧柡鈧柡鈧柡鈧柡鈧柡鈧柡鈧柡鈧柡鈧?閻楀牊娼堟竟鐗堟閿涙碍婀伴弬鍥﹁礋CSDN閸楁矮瀵岄妴瀹巑linsan閵嗗秶娈戦崢鐔峰灡閺傚洨鐝烽敍宀勪紥瀵扮嫝C 4.0 BY-SA閻楀牊娼堥崡蹇氼唴閿涘矁娴嗘潪鍊燁嚞闂勫嫪绗傞崢鐔告瀮閸戝搫顦╅柧鐐复閸欏﹥婀版竟鐗堟閵?閸樼喐鏋冮柧鐐复閿涙ttps://blog.csdn.net/amlinsan/article/details/121038991
 
 
 
@@ -293,23 +293,23 @@ index c209e18e..c98ca19c 100644
 
 
 
-### 鍏抽棴**secure boot** 
+### 閸忔娊妫?*secure boot** 
 
-鐗瑰緛锛?
-push浜嗕笢瑗匡紝閲嶅惎浼氭仮澶嶃€?
+閻楃懓绶涢敍?
+push娴滃棔绗㈢憲鍖＄礉闁插秴鎯庢导姘划婢跺秲鈧?
 
 
-鍦?alps/vendor/mediatek/proprietary/bootable/bootloader/preloader/Makefile 涓?
-灏嗭細
+閸?alps/vendor/mediatek/proprietary/bootable/bootloader/preloader/Makefile 娑?
+鐏忓棴绱?
 
     @echo '#'define CUSTOM_SUSBDL_CFG $(MTK_SEC_USBDL) >> $@
     @echo '#'define CUSTOM_SBOOT_CFG $(MTK_SEC_BOOT) >> $@
 
-鏀逛负锛?
+閺€閫涜礋閿?
     @echo '#'define CUSTOM_SUSBDL_CFG ATTR_SUSBDL_DISABLE >> $@
     @echo '#'define CUSTOM_SBOOT_CFG ATTR_SBOOT_DISABLE >> $@
 
-涔熷彲浠ュ彧閽堝debug鐗堟湰杩涜淇敼锛?
+娑旂喎褰叉禒銉ュ涧闁藉牆顕甦ebug閻楀牊婀版潻娑滎攽娣囶喗鏁奸敍?
 ifeq ($(TARGET_BUILD_VARIANT), user)
     @echo '#'define CUSTOM_SUSBDL_CFG $(MTK_SEC_USBDL) >> $@
     @echo '#'define CUSTOM_SBOOT_CFG $(MTK_SEC_BOOT) >> $@
@@ -317,7 +317,7 @@ else
     @echo '#'define CUSTOM_SUSBDL_CFG ATTR_SUSBDL_DISABLE >> $@
     @echo '#'define CUSTOM_SBOOT_CFG ATTR_SBOOT_DISABLE >> $@
 endif
-鈥斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€?鐗堟潈澹版槑锛氭湰鏂囦负CSDN鍗氫富銆宎mlinsan銆嶇殑鍘熷垱鏂囩珷锛岄伒寰狢C 4.0 BY-SA鐗堟潈鍗忚锛岃浆杞借闄勪笂鍘熸枃鍑哄閾炬帴鍙婃湰澹版槑銆?鍘熸枃閾炬帴锛歨ttps://blog.csdn.net/amlinsan/article/details/121038991
+閳ユ柡鈧柡鈧柡鈧柡鈧柡鈧柡鈧柡鈧柡鈧柡鈧柡鈧柡鈧柡鈧柡鈧柡鈧柡鈧?閻楀牊娼堟竟鐗堟閿涙碍婀伴弬鍥﹁礋CSDN閸楁矮瀵岄妴瀹巑linsan閵嗗秶娈戦崢鐔峰灡閺傚洨鐝烽敍宀勪紥瀵扮嫝C 4.0 BY-SA閻楀牊娼堥崡蹇氼唴閿涘矁娴嗘潪鍊燁嚞闂勫嫪绗傞崢鐔告瀮閸戝搫顦╅柧鐐复閸欏﹥婀版竟鐗堟閵?閸樼喐鏋冮柧鐐复閿涙ttps://blog.csdn.net/amlinsan/article/details/121038991
 
 
 
@@ -344,7 +344,7 @@ index 2f0030e..ee33eb2 100644
 
 
 
-### 鍏抽棴recovery閲嶅惎
+### 閸忔娊妫磖ecovery闁插秴鎯?
 
 ```
 lucas@DLCNRDBS03:~/AOSP/Memor11_A11/bootable/recovery$ git diff recovery_main.cpp 
@@ -378,7 +378,7 @@ index 844815bf..ca6d46bf 100644
 
 
 
-### OEM unlock鏃犻渶杈撳叆瀵嗙爜
+### OEM unlock閺冪娀娓舵潏鎾冲弳鐎靛棛鐖?
 
 ```
 lucas@DLCNRDBS03:~/AOSP/Memor11_A11/frameworks/base$ git diff services/core/java/com/android/server/PersistentDataBlockService.java 
@@ -419,7 +419,7 @@ alias unlock_system='adb shell "getprop sys.oem_unlock_allowed" ; sleep 2; adb s
 
 
 
-### 寮€鏈轰笉鍒犻櫎last_result鏂囦欢
+### 瀵偓閺堣桨绗夐崚鐘绘珟last_result閺傚洣娆?
 
 ```
 ldeng@dotorom:~/code/AOSP/Common_Code/DLSystemUpdate$ git diff  app/src/main/java/com/datalogic/systemupdate/SystemUpgradeService.java
@@ -489,7 +489,7 @@ index f3c2dab..d9d6f00 100644
 
 
 
-### 鎻愰珮AB鍗囩骇OTA鐨勯€熷害
+### 閹绘劙鐝瓵B閸楀洨楠嘜TA閻ㄥ嫰鈧喎瀹?
 
 ```
 ldeng@dotorom:~/code/AOSP/M11_A11/device/mediatek/common$ git diff 
@@ -513,7 +513,7 @@ ldeng@dotorom:~/code/AOSP/M11_A11/device/mediatek/common$
 
 
 
-### 榛樿寮€鍚痑db鍜屾巿鏉僡db
+### 姒涙顓诲鈧崥鐥慸b閸滃本宸块弶鍍b
 
 ```
 diff --git a/packages/SystemUI/src/com/android/systemui/usb/UsbDebuggingActivity.java b/packages/SystemUI/src/com/android/systemui/usb/UsbDebuggingActivity.java
@@ -574,7 +574,7 @@ index 95dd0bb0..7c30feec 100644
 
 ```
 
-### 鎵撳嵃甯哥敤鍫嗘爤
+### 閹垫挸宓冪敮鍝ユ暏閸棙鐖?
 
 ```
 ldeng@dotorom:~/code/AOSP/M11_A11/frameworks/base$ git diff core/java/android/os/SystemProperties.java   core/java/android/provider/Settings.java 
