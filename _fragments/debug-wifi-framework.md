@@ -19,11 +19,13 @@ Suppose you need debug about wifi framework source code, such as frameworks/opt/
 
 You can debug it by this way.
 
+
+
 1. load the build environment
 
 ```
   source build/envsetup.sh
-  lunch dl36-userdebug
+  lunch [product]-userdebug
 ```
 
 2. build the module
@@ -39,13 +41,13 @@ It will produce the apex file in the path : out/target/product/mssi_t_64_cn/syst
 - *a. if you can adb install apex file, you can do this by command:*
 
 ```
-  adb install --apex out/target/product/mssi_t_64_cn/system/apex/com.android.wifi.apex
+  adb install --apex out/target/product/[product]/system/apex/com.android.wifi.apex
 ```
 
 - *b. ortherwise you can do this by two step:*
 
 ```
-  adb push out/target/product/mssi_t_64_cn/system/apex/com.android.wifi.apex /data/local/tmp/
+  adb push out/target/product/[product]/system/apex/com.android.wifi.apex /data/local/tmp/
   adb shell "pm install --apex  data/local/tmp/com.android.wifi.apex"
 ```
 
