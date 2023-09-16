@@ -2,19 +2,19 @@
 #   Main Configs   #
 # ---------------- #
 baseurl:
-url: https://mazhuang.org
+url: https://kingofhubgit.github.io/
 date_format: "ordinal"
-title: 码志
-subtitle: "公众号：闷骚的程序员"
-description: "马壮的个人博客，公众号：闷骚的程序员"
-keywords: 码志, Zhuang Ma, mzlogin, mazhuang, 闷骚的程序员
+title: Lucas.D
+subtitle: "Lucas.D's Blog"
+description: "Lucas.D的个人博客"
+keywords: Lucas.D, Android System, Linux, Android Performance
 timezone: Asia/Shanghai
 encoding: "utf-8"
 # 页面左下角显示的年份
-since: 2015
+since: 2023
 # 源码仓库，请替换成自己的
-repository: mzlogin/mzlogin.github.io
-# 对 css 和 js 资源的 cdn 加速配置
+repository: kingofhubgit.github.io
+# 对 css 和 js 资源的 cdn 加kingofhubgit.github.io速配置
 cdn:
     jsdelivr:
         enabled: false
@@ -28,7 +28,7 @@ components:
     # 不蒜子访问统计
     busuanzi:
         enabled: false
-        start_date: 2020-05-03
+        start_date: 2023-09-01
     # My Popular Repositories
     side_bar_repo:
         enabled: true
@@ -57,12 +57,12 @@ highlight_theme: github
 # ---------------- #
 #      Author      #
 # ---------------- #
-author: Zhuang Ma
+author: Lucas.D
 organization: 
 organization_url: 
-github_username: mzlogin
-location: Wuhan, China
-email: chumpma@gmail.com
+github_username: kingofhubgit
+location: ShenZhen, China
+email: dengtonglong@gmail.com
 
 # ---------------- #
 #    Navigation    #
