@@ -11,9 +11,7 @@ topmost: true
 
 ### Basic Introduction
 
-![img](../images/posts/android/repo-artifact.jpg)
 
-![](/images/posts/java/aop-expected-order.drawio.png)
 
 ![](/images/posts/android/repo-artifact.jpg)
 
