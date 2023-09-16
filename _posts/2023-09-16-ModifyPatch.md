@@ -1,15 +1,9 @@
 ---
-layout: post
+layout: patch
 title: template page
-categories: [cate1, cate2]
+categories: Excel
 description: some word here
 keywords: keyword1, keyword2
-mermaid: false
-sequence: false
-flow: false
-mathjax: false
-mindmap: false
-mindmap2: false
 ---
 
 

@@ -1,10 +1,16 @@
+---
+layout: ubuntu
+title: template page
+categories: Excel
+description: some word here
+keywords: keyword1, keyword2
+---
+
 
 
 Ubuntu UI高级设置：
 
 sudo apt install albert
-
-
 
 
 
