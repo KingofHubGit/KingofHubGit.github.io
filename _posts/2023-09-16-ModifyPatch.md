@@ -1,5 +1,19 @@
-### 关闭开机向导
+---
+layout: post
+title: template page
+categories: [cate1, cate2]
+description: some word here
+keywords: keyword1, keyword2
+mermaid: false
+sequence: false
+flow: false
+mathjax: false
+mindmap: false
+mindmap2: false
+---
 
+
+### 鍏抽棴寮€鏈哄悜瀵?
 ```
 adb shell settings put secure user_setup_complete 1
 
@@ -62,8 +76,7 @@ index d882eda..95c98e2 100644
 
 
 
-### usb debug默认开启
-
+### usb debug榛樿寮€鍚?
 ```shell
 diff --git a/core/main.mk b/core/main.mk
 index c8ffe2d8e..05f8fdcce 100644
@@ -104,8 +117,7 @@ index c8ffe2d8e..05f8fdcce 100644
 
 
 
-### 开发者模式默认开启
-
+### 寮€鍙戣€呮ā寮忛粯璁ゅ紑鍚?
 ```
 adb shell settings put global  development_settings_enabled  1
 ```
@@ -131,7 +143,7 @@ index b191f888aa1..43c1e2e67c4 100644
 
 
 
-### pre dex 关闭
+### pre dex 鍏抽棴
 
 ```shell
 diff --git a/core/board_config.mk b/core/board_config.mk
@@ -204,11 +216,10 @@ index d877ec10d..80e8c152d 100644
 
 
 
-### root默认开启
+### root榛樿寮€鍚?
 
 
-
-### selinux关闭
+### selinux鍏抽棴
 
 ```
 diff --git a/alps/system/core/init/selinux.cpp b/alps/system/core/init/selinux.cpp
@@ -229,24 +240,20 @@ index ce8348e..1b87d60 100644
 
 
 
-### 关闭DM Verity
+### 鍏抽棴DM Verity
 
-一、关闭DM Verity：
-
-在 alps/vendor/mediatek/proprietary/bootable/bootloader/lk/platform/$(PLATFORM)/rules.mk 中
-
-将：
+涓€銆佸叧闂璂M Verity锛?
+鍦?alps/vendor/mediatek/proprietary/bootable/bootloader/lk/platform/$(PLATFORM)/rules.mk 涓?
+灏嗭細
 
     ifeq ($(MTK_DM_VERITY_OFF),yes)
         DEFINES += MTK_DM_VERITY_OFF
     endif
 
-改为强制定义 MTK_DM_VERITY_OFF：
-
+鏀逛负寮哄埗瀹氫箟 MTK_DM_VERITY_OFF锛?
         DEFINES += MTK_DM_VERITY_OFF
 
-也可以改成，仅Debug版本才定义MTK_DM_VERITY_OFF：
-
+涔熷彲浠ユ敼鎴愶紝浠匘ebug鐗堟湰鎵嶅畾涔塎TK_DM_VERITY_OFF锛?
 ifeq ($(strip $(TARGET_BUILD_VARIANT)),user)
     ifeq ($(MTK_DM_VERITY_OFF),yes)
         DEFINES += MTK_DM_VERITY_OFF
@@ -255,16 +262,12 @@ else
     DEFINES += MTK_DM_VERITY_OFF
 endif
 
-修改后rebuild，会发现在开机Logo界面提示：Your device has been unlocked and can't be trusted
+淇敼鍚巖ebuild锛屼細鍙戠幇鍦ㄥ紑鏈篖ogo鐣岄潰鎻愮ず锛歒our device has been unlocked and can't be trusted
 
-说明已经修改成功了。
+璇存槑宸茬粡淇敼鎴愬姛浜嗐€?
+浣嗘槸鐩墠杩樹笉鑳芥甯歌皟璇曪紝鎴戜滑浼氬彂鐜伴€氳繃 adb push鏂囦欢鍒皊ystem鍒嗗尯涔嬪悗涓€鏃﹂噸鍚紝push鐨勬枃浠朵細琚嚜鍔ㄦ仮澶?
 
-但是目前还不能正常调试，我们会发现通过 adb push文件到system分区之后一旦重启，push的文件会被自动恢复.
-
-是因为平台的secure boot机制，对system分区有写保护，导致无法对system进行写入，只需要将该功能关掉即可。
-————————————————
-版权声明：本文为CSDN博主「amlinsan」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/amlinsan/article/details/121038991
+鏄洜涓哄钩鍙扮殑secure boot鏈哄埗锛屽system鍒嗗尯鏈夊啓淇濇姢锛屽鑷存棤娉曞system杩涜鍐欏叆锛屽彧闇€瑕佸皢璇ュ姛鑳藉叧鎺夊嵆鍙€?鈥斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€?鐗堟潈澹版槑锛氭湰鏂囦负CSDN鍗氫富銆宎mlinsan銆嶇殑鍘熷垱鏂囩珷锛岄伒寰狢C 4.0 BY-SA鐗堟潈鍗忚锛岃浆杞借闄勪笂鍘熸枃鍑哄閾炬帴鍙婃湰澹版槑銆?鍘熸枃閾炬帴锛歨ttps://blog.csdn.net/amlinsan/article/details/121038991
 
 
 
@@ -296,28 +299,23 @@ index c209e18e..c98ca19c 100644
 
 
 
-### 关闭**secure boot** 
+### 鍏抽棴**secure boot** 
 
-特征：
-
-push了东西，重启会恢复。
-
+鐗瑰緛锛?
+push浜嗕笢瑗匡紝閲嶅惎浼氭仮澶嶃€?
 
 
-在 alps/vendor/mediatek/proprietary/bootable/bootloader/preloader/Makefile 中
-
-将：
+鍦?alps/vendor/mediatek/proprietary/bootable/bootloader/preloader/Makefile 涓?
+灏嗭細
 
     @echo '#'define CUSTOM_SUSBDL_CFG $(MTK_SEC_USBDL) >> $@
     @echo '#'define CUSTOM_SBOOT_CFG $(MTK_SEC_BOOT) >> $@
 
-改为：
-
+鏀逛负锛?
     @echo '#'define CUSTOM_SUSBDL_CFG ATTR_SUSBDL_DISABLE >> $@
     @echo '#'define CUSTOM_SBOOT_CFG ATTR_SBOOT_DISABLE >> $@
 
-也可以只针对debug版本进行修改：
-
+涔熷彲浠ュ彧閽堝debug鐗堟湰杩涜淇敼锛?
 ifeq ($(TARGET_BUILD_VARIANT), user)
     @echo '#'define CUSTOM_SUSBDL_CFG $(MTK_SEC_USBDL) >> $@
     @echo '#'define CUSTOM_SBOOT_CFG $(MTK_SEC_BOOT) >> $@
@@ -325,9 +323,7 @@ else
     @echo '#'define CUSTOM_SUSBDL_CFG ATTR_SUSBDL_DISABLE >> $@
     @echo '#'define CUSTOM_SBOOT_CFG ATTR_SBOOT_DISABLE >> $@
 endif
-————————————————
-版权声明：本文为CSDN博主「amlinsan」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
-原文链接：https://blog.csdn.net/amlinsan/article/details/121038991
+鈥斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€斺€?鐗堟潈澹版槑锛氭湰鏂囦负CSDN鍗氫富銆宎mlinsan銆嶇殑鍘熷垱鏂囩珷锛岄伒寰狢C 4.0 BY-SA鐗堟潈鍗忚锛岃浆杞借闄勪笂鍘熸枃鍑哄閾炬帴鍙婃湰澹版槑銆?鍘熸枃閾炬帴锛歨ttps://blog.csdn.net/amlinsan/article/details/121038991
 
 
 
@@ -354,7 +350,7 @@ index 2f0030e..ee33eb2 100644
 
 
 
-### 关闭recovery重启
+### 鍏抽棴recovery閲嶅惎
 
 ```
 lucas@DLCNRDBS03:~/AOSP/Memor11_A11/bootable/recovery$ git diff recovery_main.cpp 
@@ -388,7 +384,7 @@ index 844815bf..ca6d46bf 100644
 
 
 
-### OEM unlock无需输入密码
+### OEM unlock鏃犻渶杈撳叆瀵嗙爜
 
 ```
 lucas@DLCNRDBS03:~/AOSP/Memor11_A11/frameworks/base$ git diff services/core/java/com/android/server/PersistentDataBlockService.java 
@@ -429,7 +425,7 @@ alias unlock_system='adb shell "getprop sys.oem_unlock_allowed" ; sleep 2; adb s
 
 
 
-### 开机不删除last_result文件
+### 寮€鏈轰笉鍒犻櫎last_result鏂囦欢
 
 ```
 ldeng@dotorom:~/code/AOSP/Common_Code/DLSystemUpdate$ git diff  app/src/main/java/com/datalogic/systemupdate/SystemUpgradeService.java
@@ -499,7 +495,7 @@ index f3c2dab..d9d6f00 100644
 
 
 
-### 提高AB升级OTA的速度
+### 鎻愰珮AB鍗囩骇OTA鐨勯€熷害
 
 ```
 ldeng@dotorom:~/code/AOSP/M11_A11/device/mediatek/common$ git diff 
@@ -523,7 +519,7 @@ ldeng@dotorom:~/code/AOSP/M11_A11/device/mediatek/common$
 
 
 
-### 默认开启adb和授权adb
+### 榛樿寮€鍚痑db鍜屾巿鏉僡db
 
 ```
 diff --git a/packages/SystemUI/src/com/android/systemui/usb/UsbDebuggingActivity.java b/packages/SystemUI/src/com/android/systemui/usb/UsbDebuggingActivity.java
@@ -584,7 +580,7 @@ index 95dd0bb0..7c30feec 100644
 
 ```
 
-### 打印常用堆栈
+### 鎵撳嵃甯哥敤鍫嗘爤
 
 ```
 ldeng@dotorom:~/code/AOSP/M11_A11/frameworks/base$ git diff core/java/android/os/SystemProperties.java   core/java/android/provider/Settings.java 
