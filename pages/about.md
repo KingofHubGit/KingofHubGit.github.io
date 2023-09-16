@@ -20,7 +20,7 @@ permalink: /about/
 {% endfor %}
 {% if site.url contains 'kingofhubgit' %}
 <li>
-微信公众号：<br />
+<br />
 <img style="height:192px;width:192px;border:1px solid lightgrey;" src="{{ site.url }}/assets/images/qrcode.jpg" alt="Lucas.D" />
 </li>
 {% endif %}
