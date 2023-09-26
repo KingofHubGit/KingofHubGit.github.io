@@ -279,25 +279,25 @@ Element include
 
 
 
-copy-link-files.json
+- copy-link-files.json
 
 存在copy link字段会生成
 
 
 
-local_manifests
+- local_manifests
 
 设置本地清单，只影响本地代码，不受远程清单控制
 
 
 
-manifests
+- manifests
 
 主清单，里面可以有多个xml，根据需要切换哪个，默认情况下是default.xml。
 
 
 
-manifests.git
+- manifests.git
 
 manifests清单文件的git信息
 
@@ -315,31 +315,31 @@ manifest.xml在老版本中是manifests/default.xml的链接；
 
 
 
-project.list 
+- project.list 
 
 所有子仓库的path
 
 
 
-project-objects
+- project-objects
 
 所有子仓库的git信息对象
 
 
 
-projects
+- projects
 
 所有子仓库的git信息实例
 
 
 
-repo
+- repo
 
 repo python脚本的启动文件
 
 
 
-TRACE_FILE
+- TRACE_FILE
 
 repo操作相关的trace
 
@@ -450,7 +450,7 @@ c.xml（local_manifests）
 
 ## 用法
 
-基本结构：
+- 基本结构：
 
 ```
 repo <COMMAND> <OPTIONS>
@@ -458,7 +458,7 @@ repo <COMMAND> <OPTIONS>
 
 
 
-查看版本：
+- 查看版本：
 
 ```
 repo version
@@ -467,7 +467,7 @@ repo version
 
 
 
-自更新：
+- 自更新：
 
 ```
 repo selfupdate
@@ -476,7 +476,7 @@ repo selfupdate
 
 
 
-帮助：
+- 帮助：
 
 ```
 repo help [--all|command]
@@ -484,7 +484,7 @@ repo help [--all|command]
 
 
 
-同步：
+- 同步：
 
 ```markdown
 repo sync [project_name]
@@ -498,7 +498,7 @@ repo sync [project_name]
 
 
 
-切换项目起始分支：
+- 切换项目起始分支：
 
 ```
 repo start <newbranchname> [--all|<project>...]
@@ -507,7 +507,7 @@ repo start <newbranchname> [--all|<project>...]
 
 
 
-切换项目分支：
+- 切换项目分支：
 
 ```
 repo checkout <branchname> [<project>...]
@@ -516,7 +516,7 @@ repo checkout <branchname> [<project>...]
 
 
 
-查询项目分支：
+- 查询项目分支：
 
 ```
 repo branches [<project>...]
@@ -525,7 +525,7 @@ repo branches [<project>...]
 
 
 
-查看项目改动点：
+- 查看项目改动点：
 
 ```
 repo diff [<project>...]
@@ -534,7 +534,7 @@ repo diff [<project>...]
 
 
 
-查看项目改动点：
+- 查看项目改动点：
 
 ```
 repo stage -i [<project>...]
@@ -543,7 +543,7 @@ repo stage -i [<project>...]
 
 
 
-清除项目无用分支（在远程没有的分支名）
+- 清除项目无用分支（在远程没有的分支名）
 
 ```
 repo prune [<project>...]
@@ -552,7 +552,7 @@ repo prune [<project>...]
 
 
 
-删除某个分支：
+- 删除某个分支：
 
 ```
 repo abandon <branchname> [<rpoject>...]
@@ -561,7 +561,7 @@ repo abandon <branchname> [<rpoject>...]
 
 
 
-查询项目改动文件：
+- 查询项目改动文件：
 
 ```
 repo status [<project>...]
@@ -570,7 +570,7 @@ repo status [<project>...]
 
 
 
-和gerrit相关，没有深入研究：
+- 和gerrit相关，没有深入研究：
 
 ```
 repo remote add <remotename> <url> [<project>...]
@@ -583,7 +583,7 @@ repo download {project change[/patchset]}
 
 
 
-最有用的命令，循环遍历执行：
+- 最有用的命令，循环遍历执行：
 
 ```
 repo forall [<project>...] -c <command>
@@ -594,7 +594,7 @@ repo forall [<project>...] -c <command>
 
 ```
 
-例如打印各个仓库的环境变量：
+- 例如打印各个仓库的环境变量：
 
 ```
 repo forall -c "printenv"
@@ -608,7 +608,7 @@ REPO_RREV 指定项目在克隆时的指定分支，manifest里的revision属性
 
 
 
-使用repo查询，语法比单纯的grep更加易于理解，但是受众不广。
+- 使用repo查询，语法比单纯的grep更加易于理解，但是受众不广。
 
 ```
 repo grep {pattern | -e pattern} [<project>...]
@@ -661,4 +661,95 @@ repo manifest [-o {-|NAME.xml} [-r]]
 
 
 ## 场景案例
+
+虽然了解呢repo的详细使用方法，还是觉得很空虚。
+
+怎么灵活使用，而方便于开发者呢？进而提升效率
+
+
+
+### 案例一：
+
+假设有一些仓库或者分支，比如密钥，特定源代码，不能公开给ODM或者合作伙伴，虽然他们没有权限拉取，但加入清单，每次提示拉取失败，也是不好的吧。
+
+如果每次拉取项目代码到本地，开发者自己用，都需要人工操作一遍，一是繁琐，二是容易出错。
+
+那该怎么办？
+
+- 创建local_manifests目录，添加你需要的特地仓库
+- 使用extend-project，指定你特定的分支
+- 使用remove-project，删除不需要的仓库，比如影响编译
+- 使用copyfile，自动化拷贝特定的apk或者其他文件
+- 使用linkfile，经常使用的脚本/命令集链接到根目录
+- ... ...
+
+
+
+
+
+### 案例二：
+
+当我需要使用repo forall时，在庞大的AOSP源码中，假设我需要单独不对某个或某几个仓库操作，有什么办法呢？
+
+- 方法1（入门）：
+
+  ```
+  repo forall [<project>...] -c <command>
+  ```
+
+  将所需要的仓库列表粘贴到[<project>...] 
+
+  弊端明显：项目太多太长了，容易出错
+
+  
+
+- 方法2（进阶）：
+
+  发现.repo下面有project.list文件，用于存储所有项目列表。
+
+  ```
+  cp project.list project2.list
+  ```
+
+  将忽略的几个仓库删除
+
+  ```
+  vim project2.list
+  ```
+
+  使用这种方法执行：
+
+  ```
+  repo forall `cat .repo/project2.list` -c <command>
+  ```
+
+  
+
+- 方法3（高端）：
+
+如果某几个仓库是长期要skip的，利用好annotation元素。
+
+
+
+在对应的项目中，加入如下环境变量标识：
+
+```
+<annotation name="IS_SKIP" value="1"/>
+```
+
+
+
+在forall中写入逻辑：
+
+```
+repo forall -c 'if [[$IS_SKIP != 1]]; then <command> ; fi'
+```
+
+
+
+以上是伪代码，传递基本思想，如果需要使用，自行研究。
+
+
+
+
 
