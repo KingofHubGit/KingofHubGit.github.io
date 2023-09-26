@@ -9,116 +9,84 @@ topmost: true
 
 
 
-### Basic Introduction
+## 基本介绍
+
+### 描述
+
+- Repo主要产生于AOSP开发，因为Android源码庞大，将各个仓库分别用git来管理。
+
+- Repo通过manifest配置文件来管理众多的源码git仓库，且支持使用repo的众多命令集来操作各个仓库源码。
+- Repo使用Python语言开发的，2和3均支持，所以需要有python环境。
+
+- Repo的基本框架，可以简单粗暴地理解为，repo解析manifest文件，然后将整个项目的信息，以python类的形式，加载到了系统内存/系统环境。
+
+- 基于配置好的repo环境，repo相关的命令操作，相当于开启子线程执行对应的git操作，每个repo命令都可以在.repo/repo/subcmds下面找到对应的python子脚本。
+
+  ```shell
+  $ ls
+  abandon.py      diffmanifests.py  grep.py      init.py      prune.py       smartsync.py  sync.py
+  branches.py     diff.py           help.py      list.py      __pycache__    stage.py      upload.py
+  checkout.py     download.py       info.py      manifest.py  rebase.py      start.py      version.py
+  cherry_pick.py  forall.py         __init__.py  overview.py  selfupdate.py  status.py
+  ```
+
+  如果需要，你可以执行定制你的repo命令。
+
+- 关于源码解析，详细可参考文档：
+
+[深层次的讲解repo原理]: https://blog.csdn.net/stoic163/article/details/78790349
 
 
 
-![](/images/posts/android/repo-artifact.jpg)
+### 组成
+
+- Repo脚本： python脚本本身
+- Repo仓库：管理python代码的仓库
+- Manifest仓库： 管理repo项目的清单文件仓库
+- AOSP子项目仓库：各个子项目的仓库
+
+![image-20230926160910880](https://github.com/KingofHubGit/ImageFactory/Public/image-20230926160910880.png)
 
 
 
-- Repo脚本
+## Windows版本
 
-- Repo仓库
+正常情况下，建议使用Linux环境下使用repo。
 
-- Manifest仓库
-- AOSP子项目仓库
+但是如果要在Windows下使用，也不是不可以。
 
+官方文档可参考：
 
-
-主要是Linux版本
-
-Windows版本可查看：
-
-```markdown
-repo/docs/windows.md
-
+```
+.repo/repo/docs/windows.md
 # References：
 * https://github.com/git-for-windows/git/wiki/Symbolic-Links
 * https://blogs.windows.com/windowsdeveloper/2016/12/02/symlinks-windows-10/
-
-```
-
-不太建议使用。
-
-
-
-Google official：
-
-```markdown
-create bin
-    mkdir ~/bin
-    PATH=~/bin:$PATH
-
-repo bin
-    curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
-    sudo chmod a+x ~/bin/repo
-
-repo init -u https://android.googlesource.com/platform/manifest
 ```
 
 
 
-如果Repo脚本所在的目录存在一个Repo仓库，那么要满足以下条件：
+## URL设置
 
-​    (1). 存在一个.git目录；
+### 手动
 
-​    (2). 存在一个main.py文件；
+通过环境变量修改repo仓库地址和分支：
 
-​    (3). 存在一个git_config.py文件；
+```
+REPO_URL = 'https://xxx.xxx.net/android-common-utils/git-repo.git'
+REPO_REV = 'stable'
+```
 
-​    (4). 存在一个project.py文件；
+可以将自己定制的repo，传到github，然后每次使用自己的repo，但这个地方记得改：
 
-​    (5). 存在一个subcmds目录。
+![image-20230926163422333](https://github.com/KingofHubGit/ImageFactory/Public/image-20230926163422333.png)
 
-
+### 自动
 
 ```shell
-.repo$ tree -L 1
-.
-├── copy-link-files.json
-├── internal-fs-layout.md -> repo/docs/internal-fs-layout.md
-├── manifests
-├── manifests.git
-├── manifest.xml
-├── project.list
-├── project-objects
-├── projects
-├── repo
-└── TRACE_FILE
+repo --trace init -u [manifest_git_path] -m [manifest_file_name] -b [branch_name] --repo-url=[repo_url] --no-repo-verify
 
-.repo/repo$ tree -d -L 1
-.
-├── docs
-├── hooks
-├── man
-├── __pycache__
-├── release
-├── subcmds
-└── tests
-
-```
-
-
-
-XmlManifest作了描述了AOSP的Repo目录（repodir）、AOSP 根目录（topdir）和Manifest.xml文件（manifestFile）之外，
-
-还使用两个MetaProject对象描述了AOSP的Repo仓库（repoProject）和Manifest仓库（manifestProject）。
-
-
-
-.repo/repo/project.py
-
-
-
-### Creation of REPO
-
-```markdown
-REPO_URL = 'https://blqsrv819.dl.net/android-common-utils/git-repo.git'
-REPO_REV = 'stable'
-
-repo --trace init -u manifest_git_path -m manifest_file_name -b branch_name --repo-url=repo_url --no-repo-verify
-
+--trace:查看repo背后的具体操作。
 -u: 指定Manifest库的Git访问路径。
 -m: 指定要使用的Manifest文件。
 -b: 指定要使用Manifest仓库中的某个特定分支。
@@ -128,435 +96,53 @@ repo --trace init -u manifest_git_path -m manifest_file_name -b branch_name --re
 
 
 
-DL源  (repo 版本较老)：
+google官网最新的，需要fq：
 
-```shell
-repo --trace init -u git@blqsrv819.dl.net:repo_test/manifest.git -b dl36_r_dev  -m default.xml --repo-url=git@blqsrv819.dl.net:android-common-utils/git-repo.git --no-repo-verify
+```
+mkdir ~/bin
+PATH=~/bin:$PATH
+curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+sudo chmod a+x ~/bin/repo
 ```
 
 
 
-国内源 (repo 新版本)：
+如果没有工具，
+
+- 可以尝试国内一些源，比如
+
+  ```
+  --repo-url=https://gerrit-googlesource.lug.ustc.edu.cn/git-repo
+  ```
+
+- 尝试github上现成的，比如
+
+  ```
+  ```
+
+  注意是用https还是ssh的方式，格式稍有不同。
+
+  
+
+## Manifest配置
+
+官方的manifest配置可以参考.repo/repo/docs/manifest-format.txt
 
 ```
-repo --trace init -u git@blqsrv819.dl.net:repo_test/trainning_manifest.git -b main   --repo-url=https://gerrit-googlesource.lug.ustc.edu.cn/git-repo --no-repo-verify
-```
-
-
-
-自行创建实验：
-
-```
-repo --trace init -u git@blqsrv819.dl.net:repo_test/trainning_manifest.git -b main   --repo-url=git@blqsrv819.dl.net:android-common-utils/git-repo.git --no-repo-verify
-```
-
-
-
-
-
-参考.repo/repo/docs/manifest-format.txt文件
-
-````markdown
-# repo Manifest Format
-
-A repo manifest describes the structure of a repo client; that is
-the directories that are visible and where they should be obtained
-from with git.
-
-The basic structure of a manifest is a bare Git repository holding
-a single `default.xml` XML file in the top level directory.
-
-Manifests are inherently version controlled, since they are kept
-within a Git repository.  Updates to manifests are automatically
-obtained by clients during `repo sync`.
-
-[TOC]
-
-
-## XML File Format
-
-A manifest XML file (e.g. `default.xml`) roughly conforms to the
-following DTD:
-
-​```xml
-<!DOCTYPE manifest [
-  <!ELEMENT manifest (notice?,
-                      remote*,
-                      default?,
-                      manifest-server?,
-                      remove-project*,
-                      project*,
-                      extend-project*,
-                      repo-hooks?,
-                      include*)>
-
-  <!ELEMENT notice (#PCDATA)>
-
-  <!ELEMENT remote EMPTY>
-  <!ATTLIST remote name         ID    #REQUIRED>
-  <!ATTLIST remote alias        CDATA #IMPLIED>
-  <!ATTLIST remote fetch        CDATA #REQUIRED>
-  <!ATTLIST remote pushurl      CDATA #IMPLIED>
-  <!ATTLIST remote review       CDATA #IMPLIED>
-  <!ATTLIST remote revision     CDATA #IMPLIED>
-
-  <!ELEMENT default EMPTY>
-  <!ATTLIST default remote      IDREF #IMPLIED>
-  <!ATTLIST default revision    CDATA #IMPLIED>
-  <!ATTLIST default dest-branch CDATA #IMPLIED>
-  <!ATTLIST default upstream    CDATA #IMPLIED>
-  <!ATTLIST default sync-j      CDATA #IMPLIED>
-  <!ATTLIST default sync-c      CDATA #IMPLIED>
-  <!ATTLIST default sync-s      CDATA #IMPLIED>
-  <!ATTLIST default sync-tags   CDATA #IMPLIED>
-
-  <!ELEMENT manifest-server EMPTY>
-  <!ATTLIST manifest-server url CDATA #REQUIRED>
-
-  <!ELEMENT project (annotation*,
-                     project*,
-                     copyfile*,
-                     linkfile*)>
-  <!ATTLIST project name        CDATA #REQUIRED>
-  <!ATTLIST project path        CDATA #IMPLIED>
-  <!ATTLIST project remote      IDREF #IMPLIED>
-  <!ATTLIST project revision    CDATA #IMPLIED>
-  <!ATTLIST project dest-branch CDATA #IMPLIED>
-  <!ATTLIST project groups      CDATA #IMPLIED>
-  <!ATTLIST project sync-c      CDATA #IMPLIED>
-  <!ATTLIST project sync-s      CDATA #IMPLIED>
-  <!ATTLIST project sync-tags   CDATA #IMPLIED>
-  <!ATTLIST project upstream CDATA #IMPLIED>
-  <!ATTLIST project clone-depth CDATA #IMPLIED>
-  <!ATTLIST project force-path CDATA #IMPLIED>
-
-  <!ELEMENT annotation EMPTY>
-  <!ATTLIST annotation name  CDATA #REQUIRED>
-  <!ATTLIST annotation value CDATA #REQUIRED>
-  <!ATTLIST annotation keep  CDATA "true">
-
-  <!ELEMENT copyfile EMPTY>
-  <!ATTLIST copyfile src  CDATA #REQUIRED>
-  <!ATTLIST copyfile dest CDATA #REQUIRED>
-
-  <!ELEMENT linkfile EMPTY>
-  <!ATTLIST linkfile src CDATA #REQUIRED>
-  <!ATTLIST linkfile dest CDATA #REQUIRED>
-
-  <!ELEMENT extend-project EMPTY>
-  <!ATTLIST extend-project name CDATA #REQUIRED>
-  <!ATTLIST extend-project path CDATA #IMPLIED>
-  <!ATTLIST extend-project groups CDATA #IMPLIED>
-  <!ATTLIST extend-project revision CDATA #IMPLIED>
-
-  <!ELEMENT remove-project EMPTY>
-  <!ATTLIST remove-project name  CDATA #REQUIRED>
-
-  <!ELEMENT repo-hooks EMPTY>
-  <!ATTLIST repo-hooks in-project CDATA #REQUIRED>
-  <!ATTLIST repo-hooks enabled-list CDATA #REQUIRED>
-
-  <!ELEMENT include EMPTY>
-  <!ATTLIST include name CDATA #REQUIRED>
-]>
-
-A description of the elements and their attributes follows.
-
-
-### Element manifest
-
-The root element of the file.
-
-
-### Element remote
-
-One or more remote elements may be specified.  Each remote element
-specifies a Git URL shared by one or more projects and (optionally)
-the Gerrit review server those projects upload changes through.
-
-Attribute `name`: A short name unique to this manifest file.  The
-name specified here is used as the remote name in each project's
-.git/config, and is therefore automatically available to commands
-like `git fetch`, `git remote`, `git pull` and `git push`.
-
-Attribute `alias`: The alias, if specified, is used to override
-`name` to be set as the remote name in each project's .git/config.
-Its value can be duplicated while attribute `name` has to be unique
-in the manifest file. This helps each project to be able to have
-same remote name which actually points to different remote url.
-
-Attribute `fetch`: The Git URL prefix for all projects which use
-this remote.  Each project's name is appended to this prefix to
-form the actual URL used to clone the project.
-
-Attribute `pushurl`: The Git "push" URL prefix for all projects
-which use this remote.  Each project's name is appended to this
-prefix to form the actual URL used to "git push" the project.
-This attribute is optional; if not specified then "git push"
-will use the same URL as the `fetch` attribute.
-
-Attribute `review`: Hostname of the Gerrit server where reviews
-are uploaded to by `repo upload`.  This attribute is optional;
-if not specified then `repo upload` will not function.
-
-Attribute `revision`: Name of a Git branch (e.g. `master` or
-`refs/heads/master`). Remotes with their own revision will override
-the default revision.
-
-### Element default
-
-At most one default element may be specified.  Its remote and
-revision attributes are used when a project element does not
-specify its own remote or revision attribute.
-
-Attribute `remote`: Name of a previously defined remote element.
-Project elements lacking a remote attribute of their own will use
-this remote.
-
-Attribute `revision`: Name of a Git branch (e.g. `master` or
-`refs/heads/master`).  Project elements lacking their own
-revision attribute will use this revision.
-
-Attribute `dest-branch`: Name of a Git branch (e.g. `master`).
-Project elements not setting their own `dest-branch` will inherit
-this value. If this value is not set, projects will use `revision`
-by default instead.
-
-Attribute `upstream`: Name of the Git ref in which a sha1
-can be found.  Used when syncing a revision locked manifest in
--c mode to avoid having to sync the entire ref space. Project elements
-not setting their own `upstream` will inherit this value.
-
-Attribute `sync-j`: Number of parallel jobs to use when synching.
-
-Attribute `sync-c`: Set to true to only sync the given Git
-branch (specified in the `revision` attribute) rather than the
-whole ref space.  Project elements lacking a sync-c element of
-their own will use this value.
-
-Attribute `sync-s`: Set to true to also sync sub-projects.
-
-Attribute `sync-tags`: Set to false to only sync the given Git
-branch (specified in the `revision` attribute) rather than
-the other ref tags.
-
-
-### Element manifest-server
-
-At most one manifest-server may be specified. The url attribute
-is used to specify the URL of a manifest server, which is an
-XML RPC service.
-
-The manifest server should implement the following RPC methods:
-
-    GetApprovedManifest(branch, target)
-
-Return a manifest in which each project is pegged to a known good revision
-for the current branch and target. This is used by repo sync when the
---smart-sync option is given.
-
-The target to use is defined by environment variables TARGET_PRODUCT
-and TARGET_BUILD_VARIANT. These variables are used to create a string
-of the form $TARGET_PRODUCT-$TARGET_BUILD_VARIANT, e.g. passion-userdebug.
-If one of those variables or both are not present, the program will call
-GetApprovedManifest without the target parameter and the manifest server
-should choose a reasonable default target.
-
-    GetManifest(tag)
-
-Return a manifest in which each project is pegged to the revision at
-the specified tag. This is used by repo sync when the --smart-tag option
-is given.
-
-
-### Element project
-
-One or more project elements may be specified.  Each element
-describes a single Git repository to be cloned into the repo
-client workspace.  You may specify Git-submodules by creating a
-nested project.  Git-submodules will be automatically
-recognized and inherit their parent's attributes, but those
-may be overridden by an explicitly specified project element.
-
-Attribute `name`: A unique name for this project.  The project's
-name is appended onto its remote's fetch URL to generate the actual
-URL to configure the Git remote with.  The URL gets formed as:
-
-    ${remote_fetch}/${project_name}.git
-
-where ${remote_fetch} is the remote's fetch attribute and
-${project_name} is the project's name attribute.  The suffix ".git"
-is always appended as repo assumes the upstream is a forest of
-bare Git repositories.  If the project has a parent element, its
-name will be prefixed by the parent's.
-
-The project name must match the name Gerrit knows, if Gerrit is
-being used for code reviews.
-
-Attribute `path`: An optional path relative to the top directory
-of the repo client where the Git working directory for this project
-should be placed.  If not supplied the project name is used.
-If the project has a parent element, its path will be prefixed
-by the parent's.
-
-Attribute `remote`: Name of a previously defined remote element.
-If not supplied the remote given by the default element is used.
-
-Attribute `revision`: Name of the Git branch the manifest wants
-to track for this project.  Names can be relative to refs/heads
-(e.g. just "master") or absolute (e.g. "refs/heads/master").
-Tags and/or explicit SHA-1s should work in theory, but have not
-been extensively tested.  If not supplied the revision given by
-the remote element is used if applicable, else the default
-element is used.
-
-Attribute `dest-branch`: Name of a Git branch (e.g. `master`).
-When using `repo upload`, changes will be submitted for code
-review on this branch. If unspecified both here and in the
-default element, `revision` is used instead.
-
-Attribute `groups`: List of groups to which this project belongs,
-whitespace or comma separated.  All projects belong to the group
-"all", and each project automatically belongs to a group of
-its name:`name` and path:`path`.  E.g. for
-<project name="monkeys" path="barrel-of"/>, that project
-definition is implicitly in the following manifest groups:
-default, name:monkeys, and path:barrel-of.  If you place a project in the
-group "notdefault", it will not be automatically downloaded by repo.
-If the project has a parent element, the `name` and `path` here
-are the prefixed ones.
-
-Attribute `sync-c`: Set to true to only sync the given Git
-branch (specified in the `revision` attribute) rather than the
-whole ref space.
-
-Attribute `sync-s`: Set to true to also sync sub-projects.
-
-Attribute `upstream`: Name of the Git ref in which a sha1
-can be found.  Used when syncing a revision locked manifest in
--c mode to avoid having to sync the entire ref space.
-
-Attribute `clone-depth`: Set the depth to use when fetching this
-project.  If specified, this value will override any value given
-to repo init with the --depth option on the command line.
-
-Attribute `force-path`: Set to true to force this project to create the
-local mirror repository according to its `path` attribute (if supplied)
-rather than the `name` attribute.  This attribute only applies to the
-local mirrors syncing, it will be ignored when syncing the projects in a
-client working directory.
-
-### Element extend-project
-
-Modify the attributes of the named project.
-
-This element is mostly useful in a local manifest file, to modify the
-attributes of an existing project without completely replacing the
-existing project definition.  This makes the local manifest more robust
-against changes to the original manifest.
-
-Attribute `path`: If specified, limit the change to projects checked out
-at the specified path, rather than all projects with the given name.
-
-Attribute `groups`: List of additional groups to which this project
-belongs.  Same syntax as the corresponding element of `project`.
-
-Attribute `revision`: If specified, overrides the revision of the original
-project.  Same syntax as the corresponding element of `project`.
-
-### Element annotation
-
-Zero or more annotation elements may be specified as children of a
-project element. Each element describes a name-value pair that will be
-exported into each project's environment during a 'forall' command,
-prefixed with REPO__.  In addition, there is an optional attribute
-"keep" which accepts the case insensitive values "true" (default) or
-"false".  This attribute determines whether or not the annotation will
-be kept when exported with the manifest subcommand.
-
-### Element copyfile
-
-Zero or more copyfile elements may be specified as children of a
-project element. Each element describes a src-dest pair of files;
-the "src" file will be copied to the "dest" place during `repo sync`
-command.
-"src" is project relative, "dest" is relative to the top of the tree.
-
-### Element linkfile
-
-It's just like copyfile and runs at the same time as copyfile but
-instead of copying it creates a symlink.
-
-### Element remove-project
-
-Deletes the named project from the internal manifest table, possibly
-allowing a subsequent project element in the same manifest file to
-replace the project with a different source.
-
-This element is mostly useful in a local manifest file, where
-the user can remove a project, and possibly replace it with their
-own definition.
-
-### Element include
-
-This element provides the capability of including another manifest
-file into the originating manifest.  Normal rules apply for the
-target manifest to include - it must be a usable manifest on its own.
-
-Attribute `name`: the manifest to include, specified relative to
-the manifest repository's root.
-
-
-## Local Manifests
-
-Additional remotes and projects may be added through local manifest
-files stored in `$TOP_DIR/.repo/local_manifests/*.xml`.
-
-For example:
-
-    $ ls .repo/local_manifests
-    local_manifest.xml
-    another_local_manifest.xml
-    
-    $ cat .repo/local_manifests/local_manifest.xml
-    <?xml version="1.0" encoding="UTF-8"?>
-    <manifest>
-      <project path="manifest"
-               name="tools/manifest" />
-      <project path="platform-manifest"
-               name="platform/manifest" />
-    </manifest>
-
-Users may add projects to the local manifest(s) prior to a `repo sync`
-invocation, instructing repo to automatically download and manage
-these extra projects.
-
-Manifest files stored in `$TOP_DIR/.repo/local_manifests/*.xml` will
-be loaded in alphabetical order.
-
-Additional remotes and projects may also be added through a local
-manifest, stored in `$TOP_DIR/.repo/local_manifest.xml`. This method
-is deprecated in favor of using multiple manifest files as mentioned
-above.
-
-If `$TOP_DIR/.repo/local_manifest.xml` exists, it will be loaded before
-any manifest files stored in `$TOP_DIR/.repo/local_manifests/*.xml`.
+https://github.com/GerritCodeReview/git-repo/blob/main/docs/manifest-format.md
 ```
 
 
 
-元素中文含义
+### 中文版说明文档
 
-````markdown
-Manifest解析
-
-## Element manifest
+#### Element manifest
 manifest：文件的根元素。
 
-## Element notice
+#### Element notice
 完成时向用户显示的任意文本repo sync。内容只是通过它存在于清单中。
 
-## Element remote
+#### Element remote
 属性name：此清单文件唯一的短名称。此处指定的名称用作每个项目的 .git/config 中的远程名称，因此自动可用于git fetch、git remote和git pull等命令git push。
 属性alias：别名（如果指定）用于覆盖name以在每个项目的 .git/config 中设置为远程名称。它的值可以重复，而属性name在清单文件中必须是唯一的。这有助于每个项目能够具有相同的远程名称，该名称实际上指向不同的远程 url。
 属性fetch：使用此远程的所有项目的 Git URL 前缀。每个项目的名称都附加到此前缀以形成用于克隆项目的实际 URL。
@@ -564,7 +150,7 @@ manifest：文件的根元素。
 属性review：上传到的 Gerrit 服务器的主机名repo upload。这个属性是可选的；如果未指定，repo upload则将不起作用。
 属性revision：Git 分支的名称（例如main或refs/heads/main）。具有自己版本的遥控器将覆盖默认版本。
 
-## Element default
+#### Element default
 属性remote：先前定义的远程元素的名称。缺少自己的远程属性的项目元素将使用此远程。
 属性revision：Git 分支的名称（例如main或refs/heads/main）。缺少自己的修订属性的项目元素将使用此修订。
 属性dest-branch：Git 分支的名称（例如main）。未设置自己的项目元素dest-branch将继承此值。如果未设置此值，项目将revision默认使用。
@@ -574,7 +160,7 @@ manifest：文件的根元素。
 属性sync-s：设置为 true 也同步子项目。
 属性sync-tags：设置为 false 以仅同步给定的 Git 分支（在属性中指定revision）而不是其他 ref 标记。
 
-## Element manifest-server
+#### Element manifest-server
 最多可以指定一个清单服务器。url 属性用于指定清单服务器的 URL，它是一个 XML RPC 服务。
 
 清单服务器应实现以下 RPC 方法：
@@ -584,7 +170,7 @@ GetApprovedManifest(branch, target)
 GetManifest(tag)
 返回一个清单，其中每个项目都与指定标记处的修订挂钩。当给出 --smart-tag 选项时，repo sync 使用它。
 
-## Element submanifest
+#### Element submanifest
 属性name：此子清单的唯一名称（在当前（子）清单中）。它作为revision下面的默认值。相同的名称可用于具有不同父（子）清单的子清单。
 属性remote：先前定义的远程元素的名称。如果未提供，则使用默认元素给出的远程。
 属性project：清单项目名称。项目的名称附加到其远程的获取 URL 以生成实际的 URL 来配置 Git 远程。URL 的格式如下：
@@ -600,7 +186,7 @@ project不能为空，不能是绝对路径或使用“.” 或“..”路径组
 属性groups：包含的子清单中的所有项目所属的附加组的列表。这会追加和递归，这意味着子清单中的所有项目都带有所有父子清单组。与 的相应元素相同的语法project。
 属性default-groups：如果在初始化时未指定参数，则要同步的清单组列表--groups=。当该列表为空时，使用此列表而不是“默认”作为要同步的组列表。
 
-## Element project
+#### Element project
 可以指定一个或多个项目元素。每个元素都描述了一个要克隆到 repo 客户端工作区中的 Git 存储库。您可以通过创建嵌套项目来指定 Git-submodules。Git 子模块将被自动识别并继承其父模块的属性，但这些模块可能会被明确指定的项目元素覆盖。
 
 属性name：此项目的唯一名称。项目的名称附加到其远程的获取 URL 以生成实际的 URL 来配置 Git 远程。URL 的格式如下：
@@ -619,7 +205,7 @@ ${remote_fetch}/${project_name}.git
 属性clone-depth：设置获取此项目时要使用的深度。如果指定，此值将覆盖在命令行上使用 --depth 选项提供给 repo init 的任何值。
 属性force-path：设置为 true 以强制此项目根据其path属性（如果提供）而不是name属性创建本地镜像存储库。此属性仅适用于本地镜像同步，在客户端工作目录中同步项目时将被忽略。
 
-## Element extend-project
+#### Element extend-project
 修改命名项目的属性。 此元素在本地清单文件中最有用，可在不完全替换现有项目定义的情况下修改现有项目的属性。这使得本地清单对原始清单的更改更加健壮。
 
 属性path：如果指定，则将更改限制为在指定路径签出的项目，而不是具有给定名称的所有项目。
@@ -630,7 +216,7 @@ ${remote_fetch}/${project_name}.git
 属性dest-branch：如果指定，将覆盖原始项目的目标分支。与 的相应元素相同的语法project。
 属性upstream：如果指定，则覆盖原始项目的上游。与 的相应元素相同的语法project。
 
-## Element annotation
+#### Element annotation
 可以将零个或多个注释元素指定为项目或远程元素的子元素。每个元素描述一个名称-值对。对于项目，此名称-值对将在“forall”命令期间导出到每个项目的环境中，前缀为REPO__
 
 此外，还有一个可选属性“keep”，它接受不区分大小写的值“true”（默认）或“false”。此属性确定在使用 manifest 子命令导出时是否保留注释。
@@ -645,12 +231,12 @@ Element linkfile
 如果缺少，将自动创建“dest”的父目录。
 符号链接目标可以是文件或目录，但它不能指向 repo 客户端之外。
 
-## Element remove-project
+#### Element remove-project
 从内部清单表中删除命名项目，可能允许同一清单文件中的后续项目元素用不同的源替换项目。
 此元素在本地清单文件中最有用，用户可以在其中删除项目，并可能用自己的定义替换它。
 属性optional：设置为 true 以忽略没有匹配project元素的 remove-project 元素。
 
-## Element repo-hooks
+#### Element repo-hooks
 一次只能指定一个 repo-hooks 元素。
 
 属性in-project：定义repo-hooks 的项目。该值必须与先前定义的元素的name属性（而不是属性path）相匹配project。
@@ -660,7 +246,7 @@ Element superproject
 属性remote：先前定义的远程元素的名称。如果未提供，则使用默认元素给出的远程。
 属性revision：清单要为此超级项目跟踪的 Git 分支的名称。如果未提供，则使用远程元素给出的修订版（如果适用），否则使用默认元素。
 
-## Element contactinfo
+#### Element contactinfo
 此元素用于让清单作者自行注册联系信息。它具有“bugurl”作为必需的属性。这个元素可以重复，任何后面的条目都会破坏前面的条目。这将允许扩展清单的清单作者指定他们自己的联系信息。
 
 属性bugurl：针对清单所有者提交错误的 URL。
@@ -670,56 +256,177 @@ Element include
 属性name：要包含的清单，相对于清单存储库的根指定。“名称”可以不是绝对路径或使用“.” 或“..”路径组件。不对Local Manifests强制执行这些限制。
 属性groups：包含的清单中的所有项目所属的附加组的列表。这会追加和递归，这意味着包含清单中的所有项目都带有所有父包含组。与 的相应元素相同的语法project。
 
-官方文档：
-https://github.com/GerritCodeReview/git-repo/blob/main/docs/manifest-format.md
 
+
+### 配置详细
+
+#### .repo文件结构
+
+```shell
+.repo$ tree -L 1
+.
+├── copy-link-files.json
+├── local_manifests
+├── manifests
+├── manifests.git
+├── manifest.xml
+├── project.list
+├── project-objects
+├── projects
+├── repo
+└── TRACE_FILE
 ```
 
 
 
-#### Example:
+copy-link-files.json
 
-default.xml 
+存在copy link字段会生成
+
+
+
+local_manifests
+
+设置本地清单，只影响本地代码，不受远程清单控制
+
+
+
+manifests
+
+主清单，里面可以有多个xml，根据需要切换哪个，默认情况下是default.xml。
+
+
+
+manifests.git
+
+manifests清单文件的git信息
+
+
+
+manifest.xml在老版本中是manifests/default.xml的链接；
+
+在较新版本中是通过include引入：
+
+```
+<manifest>
+  <include name="default.xml" />
+</manifest>
+```
+
+
+
+project.list 
+
+所有子仓库的path
+
+
+
+project-objects
+
+所有子仓库的git信息对象
+
+
+
+projects
+
+所有子仓库的git信息实例
+
+
+
+repo
+
+repo python脚本的启动文件
+
+
+
+TRACE_FILE
+
+repo操作相关的trace
+
+
+
+#### repo配置案例
+
+所有xml如下：
+
+```shell
+.repo$ find . -name  "*.xml"
+./manifests/default.xml
+./manifests/delete_projects.xml
+./local_manifests/c.xml
+./manifest.xml
+```
+
+
+
+manifest.xml
 
 ```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+DO NOT EDIT THIS FILE!  It is generated by repo and changes will be discarded.
+If you want to use a different manifest, use `repo init -m <file>` instead.
 
+If you want to customize your checkout by overriding manifest settings, use
+the local_manifests/ directory instead.
+
+For more information on repo manifests, check out:
+https://gerrit.googlesource.com/git-repo/+/HEAD/docs/manifest-format.md
+-->
+<manifest>
+  <include name="default.xml" />
+</manifest>
+```
+
+
+
+default.xml
+
+```xml
 <manifest>
 	
 	<remote 
 	name="sub_projects" 
-	fetch="ssh://git@blqsrv819.dl.net/repo_test"
+	fetch="ssh://git@xxxx.com/repo_test"
 	/>
 	
-	<!--<default remote="sub_projects" revision="main" sync-j="8"/>-->
+	<default remote="sub_projects" revision="main" sync-j="8"/>
 	
 	<project name="GitA" path="hello_world/A" revision="main" remote="sub_projects"/>
-	
 	<project name="GitB" path="hello_world/B" revision="main" remote="sub_projects">
+        
+        <!--annotation用来配置执行forall的时候，设置环境变量的值，前缀是REPO__-->
+        <!--可以通过执行repo forall -c 'echo $REPO__KEY'，遍历到GitB仓库时,能获取到环境变量值为1.2.3-->
 		<annotation name="KEY" value="1.2.3"/>
-		<!--repo forall -c 'echo $REPO__KEY'-->
+		
+        <!--每次repo sync 重新拷贝该文件到特定目录，这里是根目录-->
 		<copyfile src="README.md" dest="README.md" />
+        <!--每次repo sync 链接该文件到特定目录，这里是根目录的README.md.link文件-->
 		<linkfile src="README.md" dest="README.md.link" />
+        
 	</project>
 	
-       <!--<include name="delete_projects.xml"/>-->
-       
-	
-	
+    <!--可以包含delete_projects.xml文件-->
+    <!--<include name="delete_projects.xml"/>-->
 
 </manifest>
 
 ```
+
+
 
 delete_projects.xml 
 
 ```xml
-
 <manifest>
+    <!--用于每次repo sync之后删除GitA项目-->
 	<remove-project name="GitA" />
 </manifest>
 ```
 
-local_manifests$ cat c.xml 
+
+
+c.xml（local_manifests）
 
 ```xml
 <manifest>
@@ -729,23 +436,29 @@ local_manifests$ cat c.xml
 	fetch="ssh://git@blqsrv819.dl.net/repo_test"
 	/>	
 	
+    <!--只在本地项目中加入GitC项目-->
 	<project name="GitC" path="hello_world/C" revision="main" remote="sub_projects">
 	</project>
-	<extend-project name="GitA" revision="dl36_r_smr" upstream="dl36_r_smr"/>
+    
+    <!--针对已存在的GitA项目，指定分支为lucas-->
+	<extend-project name="GitA" revision="lucas" upstream="lucas"/>
 	
 </manifest>
-
 ```
 
 
 
-### Usage of REPO
+## 用法
+
+基本结构：
 
 ```
 repo <COMMAND> <OPTIONS>
 ```
 
 
+
+查看版本：
 
 ```
 repo version
@@ -754,6 +467,8 @@ repo version
 
 
 
+自更新：
+
 ```
 repo selfupdate
 –no-repo-verify 不要验证repo源码.
@@ -761,11 +476,15 @@ repo selfupdate
 
 
 
+帮助：
+
 ```
 repo help [--all|command]
 ```
 
 
+
+同步：
 
 ```markdown
 repo sync [project_name]
@@ -779,12 +498,16 @@ repo sync [project_name]
 
 
 
+切换项目起始分支：
+
 ```
 repo start <newbranchname> [--all|<project>...]
 
 ```
 
 
+
+切换项目分支：
 
 ```
 repo checkout <branchname> [<project>...]
@@ -793,12 +516,16 @@ repo checkout <branchname> [<project>...]
 
 
 
+查询项目分支：
+
 ```
 repo branches [<project>...]
 
 ```
 
 
+
+查看项目改动点：
 
 ```
 repo diff [<project>...]
@@ -807,12 +534,16 @@ repo diff [<project>...]
 
 
 
+查看项目改动点：
+
 ```
 repo stage -i [<project>...]
 对git add –interactive命令的封装
 ```
 
 
+
+清除项目无用分支（在远程没有的分支名）
 
 ```
 repo prune [<project>...]
@@ -821,6 +552,8 @@ repo prune [<project>...]
 
 
 
+删除某个分支：
+
 ```
 repo abandon <branchname> [<rpoject>...]
 对git brance -D命令的封装
@@ -828,12 +561,16 @@ repo abandon <branchname> [<rpoject>...]
 
 
 
+查询项目改动文件：
+
 ```
 repo status [<project>...]
 
 ```
 
 
+
+和gerrit相关，没有深入研究：
 
 ```
 repo remote add <remotename> <url> [<project>...]
@@ -846,6 +583,8 @@ repo download {project change[/patchset]}
 
 
 
+最有用的命令，循环遍历执行：
+
 ```
 repo forall [<project>...] -c <command>
 
@@ -855,7 +594,7 @@ repo forall [<project>...] -c <command>
 
 ```
 
-
+例如打印各个仓库的环境变量：
 
 ```
 repo forall -c "printenv"
@@ -869,9 +608,12 @@ REPO_RREV 指定项目在克隆时的指定分支，manifest里的revision属性
 
 
 
+使用repo查询，语法比单纯的grep更加易于理解，但是受众不广。
+
 ```
 repo grep {pattern | -e pattern} [<project>...]
 
+#查找同时包含2和ab在同一行的文件
 repo grep -e '2' --and -e 'ab'
 
 #要找一行, 里面有#define, 并且有'MAX_PATH' 或者 'PATH_MAX':
@@ -880,10 +622,14 @@ repo grep -e '#define' --and -\( -e MAX_PATH -e PATH_MAX \)
 #查找一行, 里面有 'NODE'或'Unexpected', 并且在一个文件中这两个都有的.
 repo grep --all-match -e NODE -e Unexpected
 
-
 ```
 
 
+
+将所有manifest汇总成最终的文件：
+
+- 合入了local_manifests的内容
+- 将缺省的状态也打印出来了，比如具体的commit id
 
 ```
 repo manifest [-o {-|NAME.xml} [-r]]
@@ -891,18 +637,28 @@ repo manifest [-o {-|NAME.xml} [-r]]
 -h, –help 显示这个帮助信息后退出
 -r, –revision-as-HEAD 把某版次存为当前的HEAD
 -o -|NAME.xml, –output-file=-|NAME.xml 把manifest存为NAME.xml
+```
 
+比如上述文件中，汇总后的xml如下：
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<manifest>
+  <remote fetch="ssh://git@xxxx.com/repo_test" name="sub_projects"/>
+  
+  <default remote="sub_projects" revision="main" sync-j="8"/>
+  
+  <project dest-branch="main" name="GitA" path="hello_world/A" revision="34cab0481ba0188393509d851ddf70b5e39efd75" upstream="main"/>
+  <project dest-branch="main" name="GitB" path="hello_world/B" revision="b4b402becaf32241d8e9bdb6a126df1fd998ed2a" upstream="main">
+    <copyfile dest="README.md" src="README.md"/>
+    <linkfile dest="README.md.link" src="README.md"/>
+    <annotation name="KEY" value="1.2.3"/>
+  </project>
+  <project dest-branch="main" groups="local::c" name="GitC" path="hello_world/C" revision="d3c0cb59c49c0bd057ccee3a3f82f55ffb4470fc" upstream="main"/>
+</manifest>
 ```
 
 
 
-### Use Case
-
-
-
-
-
-
-
-
+## 场景案例
 
