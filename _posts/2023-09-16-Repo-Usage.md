@@ -55,14 +55,64 @@ topmost: true
 
 但是如果要在Windows下使用，也不是不可以。
 
-官方文档可参考：
+官方文档可参考：.repo/repo/docs/windows.md
 
 ```
-.repo/repo/docs/windows.md
 # References：
 * https://github.com/git-for-windows/git/wiki/Symbolic-Links
 * https://blogs.windows.com/windowsdeveloper/2016/12/02/symlinks-windows-10/
 ```
+
+
+
+### 环境配置
+
+- 安装比较新的Git for Windows
+
+- 安装Python 3， 不要2版本
+
+- 配置环境变量，Add以下到Path
+
+  ```
+  C:\Program Files\Git\cmd
+  C:\Program Files\Git\bin
+  C:\Program Files\Git\usr\bin
+  C:\Python36\
+  C:\Python36\Scripts\
+  C:\Users\[用户名]\bin\
+  ```
+
+   ![image-20230926231500225](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20230926231500225.png)
+
+  
+
+- 确认是python3
+
+![image-20230926231653693](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20230926231653693.png)
+
+### repo配置
+
+```
+mkdir ~/bin
+curl https://storage.googleapis.com/git-repo-downloads/repo > ~/bin/repo
+chmod a+rx ~/bin/repo
+
+cd [projects]
+mkdir -p .repo
+cd .repo
+git clone git@github.com:KingofHubGit/git-repo.git
+mv git-repo repo
+cd ..
+repo  init  -u  git@xxxx.com:lucasd-labs/manifest.git   -b main   --repo-url=git@github.com:KingofHubGit/git-repo.git --worktree
+```
+
+--worktree 参数要加，不加的话会出现 **error.GitError: Cannot initialize work tree for manifests** 错误
+
+
+
+最终使用成功init了，sync等操作也正常。
+
+![image-20230926230834983](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20230926230834983.png)
 
 
 
@@ -669,7 +719,7 @@ repo manifest [-o {-|NAME.xml} [-r]]
 
 ## 场景案例
 
-虽然了解呢repo的详细使用方法，还是觉得很空虚。
+虽然了解了repo的详细使用方法，还是觉得很空虚。
 
 怎么灵活使用，而方便于开发者呢？进而提升效率
 
@@ -758,9 +808,3 @@ repo forall -c 'if [[$IS_SKIP != 1]]; then <command> ; fi'
 
 
 
-
-
-
-```
-
-```
