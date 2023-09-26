@@ -45,7 +45,7 @@ topmost: true
 - Manifest仓库： 管理repo项目的清单文件仓库
 - AOSP子项目仓库：各个子项目的仓库
 
-![image-20230926160910880](https://github.com/KingofHubGit/ImageFactory/Public/image-20230926160910880.png)
+![image-20230926160910880](https://github.com/KingofHubGit/ImageFactory/blob/main/Public/image-20230926160910880.png?raw=true)
 
 
 
@@ -79,7 +79,9 @@ REPO_REV = 'stable'
 
 可以将自己定制的repo，传到github，然后每次使用自己的repo，但这个地方记得改：
 
-![image-20230926163422333](https://github.com/KingofHubGit/ImageFactory/Public/image-20230926163422333.png)
+![image-20230926163422333](https://github.com/KingofHubGit/ImageFactory/blob/main/Public/image-20230926163422333.png?raw=true)
+
+
 
 ### 自动
 
@@ -118,10 +120,11 @@ sudo chmod a+x ~/bin/repo
 - 尝试github上现成的，比如
 
   ```
-  ```
-
-  注意是用https还是ssh的方式，格式稍有不同。
-
+  
+```
+  
+注意是用https还是ssh的方式，格式稍有不同。
+  
   
 
 ## Manifest配置
