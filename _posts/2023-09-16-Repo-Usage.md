@@ -59,7 +59,7 @@ https://blog.csdn.net/stoic163/article/details/78790349
 
 正常情况下，建议使用Linux环境下使用repo。
 
-但是如果要在Windows下使用，也不是不可以。
+但是如果要在Windows下使用，也不是不可以，但是非常不稳定，容易出问题。
 
 官方文档可参考：.repo/repo/docs/windows.md
 
@@ -223,46 +223,110 @@ https://github.com/GerritCodeReview/git-repo/blob/main/docs/manifest-format.md
 #### Element manifest-server
 最多可以指定一个清单服务器。url 属性用于指定清单服务器的 URL，它是一个 XML RPC 服务。
 
+
+
 清单服务器应实现以下 RPC 方法：
 GetApprovedManifest(branch, target)
 返回一个清单，其中每个项目都与当前分支和目标的已知良好修订挂钩。当给出 --smart-sync 选项时，repo sync 使用它。
+
 要使用的目标由环境变量 TARGET_PRODUCT 和 TARGET_BUILD_VARIANT 定义。这些变量用于创建 $TARGET_PRODUCT-$TARGET_BUILD_VARIANT 形式的字符串，例如 passion-userdebug。如果这些变量之一或两者都不存在，程序将调用不带目标参数的 GetApprovedManifest，清单服务器应选择一个合理的默认目标。
 GetManifest(tag)
+
+
+
 返回一个清单，其中每个项目都与指定标记处的修订挂钩。当给出 --smart-tag 选项时，repo sync 使用它。
 
 #### Element submanifest
 - 属性name：此子清单的唯一名称（在当前（子）清单中）。它作为revision下面的默认值。相同的名称可用于具有不同父（子）清单的子清单。
+
 - 属性remote：先前定义的远程元素的名称。如果未提供，则使用默认元素给出的远程。
+
 - 属性project：清单项目名称。项目的名称附加到其远程的获取 URL 以生成实际的 URL 来配置 Git 远程。URL 的格式如下：
+  
+  ```
   ${remote_fetch}/${project_name}.git
-  其中 ${remote_fetch} 是远程的 fetch 属性，${project_name} 是项目的名称属性。总是附加后缀“.git”，因为 repo 假定上游是一个裸 Git 存储库的森林。如果项目有父元素，其名称将以父元素为前缀。
+  ```
+  
+  其中
+  
+   ${remote_fetch} 是远程的 fetch 属性，
+  
+  ${project_name} 是项目的名称属性。
+  
+  
+  
+  总是附加后缀“.git”，因为 repo 假定上游是一个裸 Git 存储库的森林。如果项目有父元素，其名称将以父元素为前缀。
+  
   如果 Gerrit 用于代码审查，项目名称必须与 Gerrit 知道的名称相匹配。
-  project不能为空，不能是绝对路径或使用“.” 或“..”路径组件。它总是相对于遥控器的获取设置进行解释，因此如果需要不同的基本路径，请使用所需的新设置声明一个不同的遥控器。
+  
+  project不能为空，不能是绝对路径或使用“.” 或“..”路径组件。它总是相对于遥控器的获取设置进行解释，因此
+  
+  如果需要不同的基本路径，请使用所需的新设置声明一个不同的遥控器。
+  
   如果未提供，将使用此清单的远程和项目：remote无法提供。
+  
   来自子清单的项目及其子清单被添加到 submanifest::path:<path_prefix> 组。
+  
 - 属性manifest-name：清单项目中的清单文件名。如果未提供，default.xml则使用。
+
 - 属性revision：Git 分支的名称（例如“main”或“refs/heads/main”）、标签（例如“refs/tags/stable”）或提交哈希。如果未提供，name则使用。
+
 - 属性path：相对于 repo 客户端顶级目录的可选路径，子清单 repo 客户端顶级目录应放置在该目录中。如果未提供，revision则使用。path可能不是绝对路径或使用“.” 或“..”路径组件。
+
 - 属性groups：包含的子清单中的所有项目所属的附加组的列表。这会追加和递归，这意味着子清单中的所有项目都带有所有父子清单组。与 的相应元素相同的语法project。
+
 - 属性default-groups：如果在初始化时未指定参数，则要同步的清单组列表--groups=。当该列表为空时，使用此列表而不是“默认”作为要同步的组列表。
 
 #### Element project
-可以指定一个或多个项目元素。每个元素都描述了一个要克隆到 repo 客户端工作区中的 Git 存储库。您可以通过创建嵌套项目来指定 Git-submodules。Git 子模块将被自动识别并继承其父模块的属性，但这些模块可能会被明确指定的项目元素覆盖。
+可以指定一个或多个项目元素。每个元素都描述了一个要克隆到 repo 客户端工作区中的 Git 存储库。您可以通过创建嵌套项目来指定 Git-submodules。
+
+Git 子模块将被自动识别并继承其父模块的属性，但这些模块可能会被明确指定的项目元素覆盖。
 
 - 属性name：此项目的唯一名称。项目的名称附加到其远程的获取 URL 以生成实际的 URL 来配置 Git 远程。URL 的格式如下：
+  
+  ```
   ${remote_fetch}/${project_name}.git
-  其中 ${remote_fetch} 是远程的 fetch 属性，${project_name} 是项目的名称属性。总是附加后缀“.git”，因为 repo 假定上游是一个裸 Git 存储库的森林。如果项目有父元素，其名称将以父元素为前缀。
-  如果 Gerrit 用于代码审查，项目名称必须与 Gerrit 知道的名称相匹配。“名称”不能为空，也不能是绝对路径或使用“.”。或“..”路径组件。它总是相对于遥控器的获取设置进行解释，因此如果需要不同的基本路径，请使用所需的新设置声明一个不同的遥控器。不对Local Manifests强制执行这些限制。
-- 属性path：相对于 repo 客户端顶层目录的可选路径，该项目的 Git 工作目录应放置在该目录中。如果未提供，则使用项目“名称”。如果项目有父元素，其路径将以父元素为前缀。“路径”可能不是绝对路径或使用“.” 或“..”路径组件。不对Local Manifests强制执行这些限制。
+  ```
+  
+  其中 ${remote_fetch} 是远程的 fetch 属性，${project_name} 是项目的名称属性。
+  
+  总是附加后缀“.git”，因为 repo 假定上游是一个裸 Git 存储库的森林。如果项目有父元素，其名称将以父元素为前缀。
+  
+  如果 Gerrit 用于代码审查，项目名称必须与 Gerrit 知道的名称相匹配。
+  
+  “名称”不能为空，也不能是绝对路径或使用“.”。
+  
+  或“..”路径组件。
+  
+  它总是相对于遥控器的获取设置进行解释，因此如果需要不同的基本路径，请使用所需的新设置声明一个不同的遥控器。
+  
+  不对Local Manifests强制执行这些限制。
+  
+- 属性path：相对于 repo 客户端顶层目录的可选路径，该项目的 Git 工作目录应放置在该目录中。
+  
+  如果未提供，则使用项目“名称”。如果项目有父元素，其路径将以父元素为前缀。
+  
+  “路径”可能不是绝对路径或使用“.” 或“..”路径组件。
+  
+  不对Local Manifests强制执行这些限制。
   如果您想将文件放入结帐的根目录（例如 README 或 Makefile 或其他构建脚本），请改用 copyfile或linkfile元素。
+  
 - 属性remote：先前定义的远程元素的名称。如果未提供，则使用默认元素给出的远程。
+
 - 属性revision：清单要为此项目跟踪的 Git 分支的名称。名称可以相对于 refs/heads（例如“main”）或绝对的（例如“refs/heads/main”）。标签和/或显式 SHA-1 在理论上应该有效，但尚未经过广泛测试。如果未提供，则使用远程元素给出的修订版（如果适用），否则使用默认元素。
+
 - 属性dest-branch：Git 分支的名称（例如main）。使用时repo upload，更改将提交到该分支进行代码审查。如果在此处和默认元素中均未指定，revision则使用。
+
 - 属性groups：该项目所属的组列表，以空格或逗号分隔。所有项目都属于“all”组，每个项目自动属于一组名称：name和路径：path。例如<project name="monkeys" path="barrel-of"/>，该项目定义隐含在以下清单组中：default、name:monkeys 和 path:barrel-of。如果你将一个项目放在“notdefault”组中，它不会被 repo 自动下载。如果项目有父元素，则name和path此处是前缀元素。
+
 - 属性sync-c：设置为 true 以仅同步给定的 Git 分支（在revision属性中指定）而不是整个引用空间。
+
 - 属性sync-s：设置为 true 也同步子项目。
+
 - 属性upstream：可以在其中找到 sha1 的 Git 引用的名称。在 -c 模式下同步修订锁定清单时使用，以避免必须同步整个引用空间。
+
 - 属性clone-depth：设置获取此项目时要使用的深度。如果指定，此值将覆盖在命令行上使用 --depth 选项提供给 repo init 的任何值。
+
 - 属性force-path：设置为 true 以强制此项目根据其path属性（如果提供）而不是name属性创建本地镜像存储库。此属性仅适用于本地镜像同步，在客户端工作目录中同步项目时将被忽略。
 
 #### Element extend-project
@@ -277,26 +341,42 @@ GetManifest(tag)
 - 属性upstream：如果指定，则覆盖原始项目的上游。与 的相应元素相同的语法project。
 
 #### Element annotation
-可以将零个或多个注释元素指定为项目或远程元素的子元素。每个元素描述一个名称-值对。对于项目，此名称-值对将在“forall”命令期间导出到每个项目的环境中，前缀为REPO__
+可以将零个或多个注释元素指定为项目或远程元素的子元素。每个元素描述一个名称-值对。对于项目，此名称-值对将在“forall”命令期间导出到每个项目的环境中，前缀为```REPO__```
 
 此外，还有一个可选属性“keep”，它接受不区分大小写的值“true”（默认）或“false”。此属性确定在使用 manifest 子命令导出时是否保留注释。
 
+
+
 #### Element copyfile
 
-可以将零个或多个 copyfile 元素指定为项目元素的子元素。每个元素描述一对 src-dest 文件；“src”文件将在repo sync命令期间被复制到“dest”位置。
-“src”是相对于项目的，“dest”是相对于树的顶部的。不允许从项目外部的路径复制或复制到 repo 客户端外部的路径。
+可以将零个或多个 copyfile 元素指定为项目元素的子元素。
+
+每个元素描述一对 src-dest 文件；
+
+“src”文件将在repo sync命令期间被复制到“dest”位置。
+“src”是相对于项目的，
+
+“dest”是相对于树的顶部的。
+
+不允许从项目外部的路径复制或复制到 repo 客户端外部的路径。
 “src”和“dest”必须是文件。目录或符号链接是不允许的。中间路径也不能是符号链接。
 如果缺少，将自动创建“dest”的父目录。
+
+
 
 #### Element linkfile
 
 它就像 copyfile 一样，与 copyfile 同时运行，但它不是复制而是创建一个符号链接。
+
 符号链接在“dest”（相对于树的顶部）创建，并指向“src”指定的路径，这是项目中的路径。
+
 如果缺少，将自动创建“dest”的父目录。
+
 符号链接目标可以是文件或目录，但它不能指向 repo 客户端之外。
 
 #### Element remove-project
 从内部清单表中删除命名项目，可能允许同一清单文件中的后续项目元素用不同的源替换项目。
+
 此元素在本地清单文件中最有用，用户可以在其中删除项目，并可能用自己的定义替换它。
 
 - 属性optional：设置为 true 以忽略没有匹配project元素的 remove-project 元素。
@@ -312,7 +392,9 @@ GetManifest(tag)
 - 属性revision：清单要为此超级项目跟踪的 Git 分支的名称。如果未提供，则使用远程元素给出的修订版（如果适用），否则使用默认元素。
 
 #### Element contactinfo
-此元素用于让清单作者自行注册联系信息。它具有“bugurl”作为必需的属性。这个元素可以重复，任何后面的条目都会破坏前面的条目。这将允许扩展清单的清单作者指定他们自己的联系信息。
+此元素用于让清单作者自行注册联系信息。它具有“bugurl”作为必需的属性。
+
+这个元素可以重复，任何后面的条目都会破坏前面的条目。这将允许扩展清单的清单作者指定他们自己的联系信息。
 
 - 属性bugurl：针对清单所有者提交错误的 URL。
   Element include
@@ -727,7 +809,7 @@ repo manifest [-o {-|NAME.xml} [-r]]
 
 虽然了解了repo的详细使用方法，还是觉得很空虚。
 
-怎么灵活使用，而方便于开发者呢？进而提升效率
+怎么灵活使用，而方便于开发者呢？进而提升效率。
 
 
 
