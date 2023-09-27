@@ -1,10 +1,9 @@
 ---
 layout: post
-title: Repo Usage
+title: Deep Learning of Repo
 categories: Android
 description: repo history, creation and usage
-keywords: repo, git, python
-topmost: true
+keywords: repo, git, windows repo, python
 ---
 
 
@@ -34,7 +33,7 @@ topmost: true
 
 - 关于源码解析，详细可参考文档：
 
-[深层次的讲解repo原理]: https://blog.csdn.net/stoic163/article/details/78790349
+https://blog.csdn.net/stoic163/article/details/78790349
 
 
 
@@ -45,7 +44,7 @@ topmost: true
 - Manifest仓库： 管理repo项目的清单文件仓库
 - AOSP子项目仓库：各个子项目的仓库
 
-![image-20230926160910880](https://github.com/KingofHubGit/ImageFactory/blob/main/Public/image-20230926160910880.png?raw=true)
+![image-20230926160910880](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20230926160910880.png)
 
 
 
@@ -129,7 +128,7 @@ REPO_REV = 'stable'
 
 可以将自己定制的repo，传到github，然后每次使用自己的repo，但这个地方记得改：
 
-![image-20230926163422333](https://github.com/KingofHubGit/ImageFactory/blob/main/Public/image-20230926163422333.png?raw=true)
+![image-20230926163422333](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20230926163422333.png)
 
 
 
@@ -727,17 +726,17 @@ repo manifest [-o {-|NAME.xml} [-r]]
 
 ### 案例一：
 
-假设有一些仓库或者分支，比如密钥，特定源代码，不能公开给ODM或者合作伙伴，虽然他们没有权限拉取，但加入清单，每次提示拉取失败，也是不好的吧。
+假设有一些仓库或者分支，比如密钥，涉密源代码，不能公开给ODM/客户/合作伙伴，虽然他们没有权限拉取，但加入清单，每次提示拉取失败，也是不好的吧。
 
-如果每次拉取项目代码到本地，开发者自己用，都需要人工操作一遍，一是繁琐，二是容易出错。
+如果每次拉取项目代码到本地，内部工程师自己用，都需要人工操作一遍，一是繁琐，二是容易出错。
 
 那该怎么办？
 
-- 创建local_manifests目录，添加你需要的特地仓库
+- 创建local_manifests目录，添加你需要的特地仓库，甚至也可以是一个git仓库
 - 使用extend-project，指定你特定的分支
 - 使用remove-project，删除不需要的仓库，比如影响编译
 - 使用copyfile，自动化拷贝特定的apk或者其他文件
-- 使用linkfile，经常使用的脚本/命令集链接到根目录
+- 使用linkfile，经常使用的脚本/工具链接到根目录
 - ... ...
 
 
@@ -754,7 +753,7 @@ repo manifest [-o {-|NAME.xml} [-r]]
   repo forall [<project>...] -c <command>
 ```
 
-  将所需要的仓库列表粘贴到 "[<project>...] "
+  将所需要的仓库列表粘贴到```[<project>...]```
 
   弊端明显：项目太多太长了，容易出错。
 
