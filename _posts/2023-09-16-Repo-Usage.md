@@ -6,15 +6,20 @@ description: repo history, creation and usage
 keywords: repo, git, windows repo, python
 ---
 
+Repo主要产生于AOSP开发，因为Android源码庞大，将各仓库用git管理，repo再管理他们。
+
+------
+
 
 
 ## 基本介绍
 
 ### 描述
 
-- Repo主要产生于AOSP开发，因为Android源码庞大，将各个仓库分别用git来管理。
+- Repo主要产生于AOSP开发，因为Android源码庞大，将各仓库用git管理，repo再管理他们。
 
 - Repo通过manifest配置文件来管理众多的源码git仓库，且支持使用repo的众多命令集来操作各个仓库源码。
+
 - Repo使用Python语言开发的，2和3均支持，所以需要有python环境。
 
 - Repo的基本框架，可以简单粗暴地理解为，repo解析manifest文件，然后将整个项目的信息，以python类的形式，加载到了系统内存/系统环境。
@@ -28,6 +33,8 @@ keywords: repo, git, windows repo, python
   checkout.py     download.py       info.py      manifest.py  rebase.py      start.py      version.py
   cherry_pick.py  forall.py         __init__.py  overview.py  selfupdate.py  status.py
   ```
+
+  ![image-20230927172833503](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20230927172833503.png)
 
   如果需要，你可以执行定制你的repo命令。
 
@@ -732,7 +739,7 @@ repo manifest [-o {-|NAME.xml} [-r]]
 
 那该怎么办？
 
-- 创建local_manifests目录，添加你需要的特地仓库，甚至也可以是一个git仓库
+- 创建local_manifests目录，添加你需要的特地仓库。甚至可以将local_manifests建立一个独立的git仓库
 - 使用extend-project，指定你特定的分支
 - 使用remove-project，删除不需要的仓库，比如影响编译
 - 使用copyfile，自动化拷贝特定的apk或者其他文件
