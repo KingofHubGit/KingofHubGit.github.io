@@ -226,10 +226,10 @@ https://github.com/GerritCodeReview/git-repo/blob/main/docs/manifest-format.md
 
 
 清单服务器应实现以下 RPC 方法：
-GetApprovedManifest(branch, target)
+```GetApprovedManifest(branch, target)```
 返回一个清单，其中每个项目都与当前分支和目标的已知良好修订挂钩。当给出 --smart-sync 选项时，repo sync 使用它。
 
-要使用的目标由环境变量 TARGET_PRODUCT 和 TARGET_BUILD_VARIANT 定义。这些变量用于创建 $TARGET_PRODUCT-$TARGET_BUILD_VARIANT 形式的字符串，例如 passion-userdebug。如果这些变量之一或两者都不存在，程序将调用不带目标参数的 GetApprovedManifest，清单服务器应选择一个合理的默认目标。
+要使用的目标由环境变量 ```TARGET_PRODUCT``` 和 ```TARGET_BUILD_VARIANT``` 定义。这些变量用于创建 ```$TARGET_PRODUCT-$TARGET_BUILD_VARIANT``` 形式的字符串，例如 passion-userdebug。如果这些变量之一或两者都不存在，程序将调用不带目标参数的 GetApprovedManifest，清单服务器应选择一个合理的默认目标。
 GetManifest(tag)
 
 
@@ -249,24 +249,25 @@ GetManifest(tag)
   
   其中
   
-   ${remote_fetch} 是远程的 fetch 属性，
+
+ ```${remote_fetch}``` 是远程的 fetch 属性，
+
+ ```${project_name}``` 是项目的名称属性。
+
   
-  ${project_name} 是项目的名称属性。
-  
-  
-  
+
   总是附加后缀“.git”，因为 repo 假定上游是一个裸 Git 存储库的森林。如果项目有父元素，其名称将以父元素为前缀。
-  
+
   如果 Gerrit 用于代码审查，项目名称必须与 Gerrit 知道的名称相匹配。
-  
+
   project不能为空，不能是绝对路径或使用“.” 或“..”路径组件。它总是相对于遥控器的获取设置进行解释，因此
-  
+
   如果需要不同的基本路径，请使用所需的新设置声明一个不同的遥控器。
-  
+
   如果未提供，将使用此清单的远程和项目：remote无法提供。
-  
-  来自子清单的项目及其子清单被添加到 submanifest::path:<path_prefix> 组。
-  
+
+  来自子清单的项目及其子清单被添加到 ```submanifest::path:<path_prefix>``` 组。
+
 - 属性manifest-name：清单项目中的清单文件名。如果未提供，default.xml则使用。
 
 - 属性revision：Git 分支的名称（例如“main”或“refs/heads/main”）、标签（例如“refs/tags/stable”）或提交哈希。如果未提供，name则使用。
@@ -288,7 +289,7 @@ Git 子模块将被自动识别并继承其父模块的属性，但这些模块�
   ${remote_fetch}/${project_name}.git
   ```
   
-  其中 ${remote_fetch} 是远程的 fetch 属性，${project_name} 是项目的名称属性。
+  其中 ```${remote_fetch}``` 是远程的 fetch 属性，```${project_name}``` 是项目的名称属性。
   
   总是附加后缀“.git”，因为 repo 假定上游是一个裸 Git 存储库的森林。如果项目有父元素，其名称将以父元素为前缀。
   
@@ -578,7 +579,7 @@ c.xml（local_manifests）
 <manifest>
 	<remote 
 	name="sub_projects" 
-	fetch="ssh://git@blqsrv819.dl.net/repo_test"
+	fetch="ssh://git@xxxx.xxxx.net/repo_test"
 	/>	
 	
 	<!--只在本地项目中加入GitC项目-->
