@@ -2,7 +2,7 @@
 layout: fragment
 title: Debug skill of the WiFi framework changes
 tags: [android]
-description: 调试
+description: debug
 keywords: Android, wifi, apex
 mermaid: false
 sequence: false

@@ -2,8 +2,8 @@
 layout: fragment
 title: Use Crontab to build timer task in Linux
 tags: [linux]
-description: 提效
-keywords: Android, wifi, apex
+description: efficeny
+keywords: ubuntu, crontab, timer
 mermaid: false
 sequence: false
 flow: false

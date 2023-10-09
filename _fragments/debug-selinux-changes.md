@@ -2,7 +2,7 @@
 layout: fragment
 title: Debug skill of the SEpolicy changes
 tags: [android]
-description: 调试
+description: debug
 keywords: Android, selinux， sepolicy
 mermaid: false
 sequence: false
