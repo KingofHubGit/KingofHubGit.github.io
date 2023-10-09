@@ -75,15 +75,11 @@ crontab -e
 
   
 
-## 结语
-
-可以根据需要，将所有需要执行的命令写在一个sh脚本中，然后执行。
-
-
+## 总结
 
 每分钟执行一次：
 
-```
+```shell
 * * * * * *python pythonScript.py
 ```
 
@@ -91,7 +87,7 @@ crontab -e
 
 每5分钟执行一次：
 
-```
+```shell
 */5 * * * * /bin/sh xxxx/xxxx.sh
 ```
 
@@ -99,11 +95,22 @@ crontab -e
 
 每天执行一次：
 
-```
+```shell
 0 0 * * * /bin/sh xxxx/xxxx.sh
 ```
 
 
+
+可以根据需要，将所有需要执行的命令写在一个sh脚本中，然后执行。
+
+```shell
+*/1 * * * * /bin/sh xxxx/task_every_minute.sh
+*/5 * * * * /bin/sh xxxx/task_every_5_minute.sh
+0 * * * *   /bin/sh xxxx/task_every_60_minute.sh
+0 0 * * *   /bin/sh xxxx/task_every_day.sh
+0 0 * * 0   /bin/sh xxxx/task_every_week.sh
+0 0 1 * *   /bin/sh xxxx/task_every_month.sh
+```
 
 
 
