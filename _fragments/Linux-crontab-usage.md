@@ -12,7 +12,7 @@ mindmap: false
 mindmap2: false
 ---
 
-# crontab
+# 使用crontab创建定制化定时器任务(Linux/Ubuntu)
 
 ## 官网信息
 
@@ -80,7 +80,7 @@ crontab -e
 每分钟执行一次：
 
 ```shell
-* * * * * *python pythonScript.py
+* * * * * * python pythonScript.py
 ```
 
 
