@@ -16,7 +16,7 @@ mindmap2: false
 
 ## 官网信息
 
-https://crontab.guru/
+[https://crontab.guru/](https://crontab.guru/)
 
 ![image-20231009114623019](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20231009114623019.png)
 
@@ -78,6 +78,16 @@ crontab -e
 ## 结语
 
 可以根据需要，将所有需要执行的命令写在一个sh脚本中，然后执行。
+
+
+
+每分钟执行一次：
+
+```
+* * * * * *python pythonScript.py
+```
+
+
 
 每5分钟执行一次：
 
