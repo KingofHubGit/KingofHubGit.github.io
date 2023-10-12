@@ -247,7 +247,7 @@ Google 在Android 11引入了AIDL for HALs，旨在代替HIDL原先的作用。�
 
 
 
-![在这里插入图片描述](https://img-blog.csdnimg.cn/7a5523cc95b7431ba179a21625ba0663.jpeg#pic_center)
+![AIDL演变](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/7a5523cc95b7431ba179a21625ba0663.jpeg))
 
 
 
