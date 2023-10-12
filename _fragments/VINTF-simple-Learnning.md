@@ -187,9 +187,7 @@ init/fs_mgr system property：ro.boot.avb_version
 VINTF Object也是系统API，提供给hwservicemanager、OTA升级服务、CTS DeviceInfo等模块调用以便获取信息用以匹配。
 
 
-
-可查询的供应商接口对象的代码位于 `system/libvintf`
-
+可查询的供应商接口对象的代码位于```system/libvintf```
 
 
 C++ 查询API位于：
@@ -399,5 +397,5 @@ assemble_vintf -i <input file>[:<input file>[...]] [-o <output file>] [-m]
 
 
 
-计划写一篇VINTF匹配原理和使用、stable AIDL调用的文章。
+计划写一篇VINTF匹配原理和使用，以及stable AIDL调用的文章。
 
