@@ -14,7 +14,11 @@ mindmap2: false
 
 
 
-# VINTF
+# VINTF简介
+
+
+
+## VINTF
 
 是Vendor Interface Object的缩写，即厂商接口对象。
 
@@ -192,19 +196,21 @@ C++ 查询API位于：
 
 ```system/libvintf/VintfObject.cpp```
 
+
 ```android::vintf::VintfObject```
+
 
 Java 查询API位于:
 
-```frameworks/base/core/java/android/os/VintfObject.java ```
+
+```frameworks/base/core/java/android/os/VintfObject.java```
 
 ```android.os.VintfObject```
 
 
-
 vendor和system检查不通过会弹窗：
 
-![错误弹框](https://p6-juejin.byteimg.com/tos-cn-i-k3u1fbpfcp/18fce7d1a5aa4173948c10112948b389~tplv-k3u1fbpfcp-zoom-in-crop-mark:1512:0:0:0.awebp)
+![错误弹框](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/18fce7d1a5aa4173948c10112948b389%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A1512%3A0%3A0%3A0.awebp)
 
 
 
@@ -271,6 +277,8 @@ Google 在Android 11引入了AIDL for HALs，旨在代替HIDL原先的作用。�
 </manifest>
 ```
 
+
+
 后面改为了如下：
 
 ```xml
@@ -336,7 +344,7 @@ Google 在Android 11引入了AIDL for HALs，旨在代替HIDL原先的作用。�
 
 
 
-帮助：
+### 帮助文档
 
 ```shell
 #./assemble_vintf --help
@@ -388,4 +396,8 @@ assemble_vintf -i <input file>[:<input file>[...]] [-o <output file>] [-m]
                Output has no <config> entries in <kernel>, and kernel minor
                version is set to zero. (For example, 3.18.0).
 ```
+
+
+
+计划写一篇VINTF匹配原理和使用、stable AIDL调用的文章。
 
