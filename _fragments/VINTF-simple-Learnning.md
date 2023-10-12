@@ -187,23 +187,31 @@ init/fs_mgr system property：ro.boot.avb_version
 VINTF Object也是系统API，提供给hwservicemanager、OTA升级服务、CTS DeviceInfo等模块调用以便获取信息用以匹配。
 
 
-可查询的供应商接口对象的代码位于```system/libvintf```
+可查询的供应商接口对象的代码位于```system/libvintf```。
 
 
 C++ 查询API位于：
 
-```system/libvintf/VintfObject.cpp```
+```
+system/libvintf/VintfObject.cpp
+```
 
 
-```android::vintf::VintfObject```
+```
+android::vintf::VintfObject
+```
 
 
 Java 查询API位于:
 
 
-```frameworks/base/core/java/android/os/VintfObject.java```
+```
+frameworks/base/core/java/android/os/VintfObject.java
+```
 
-```android.os.VintfObject```
+```
+android.os.VintfObject
+```
 
 
 vendor和system检查不通过会弹窗：
