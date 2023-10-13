@@ -48,7 +48,7 @@ https://source.android.google.cn/docs/core/architecture/aidl/aidl-hals?hl=zh-cn&
 
 
 
-![treble](https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2018/4/15/162c522483268cd5~tplv-t2oaga2asx-jj-mark:3024:0:0:0:q75.awebp)各分区较合理的规划方式：
+![treble](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/62f261886a2eb57d50ea47638d31fe2e.png)各分区较合理的规划方式：
 
 - Product: OEM相关定制，主要包括Apps，SDK，产品sysprops等
 - System: Android系统的Framework和Daemons
@@ -84,7 +84,7 @@ VINTF指的是Vendor Interface object，是android 8.0分离system和vendor分�
 
 Framework(system)和Device(vendor)匹配的框架如下：
 
-![VINTF框架](https://source.android.google.cn/docs/core/architecture/images/treble_vintf_mm.png?hl=zh-cn)
+![VINTF框架](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/treble_vintf_mm.png)
 
 - Manifest 描述了提供给对方的feature（Provider）
 
@@ -216,7 +216,7 @@ android.os.VintfObject
 
 vendor和system检查不通过会弹窗：
 
-![错误弹框](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/18fce7d1a5aa4173948c10112948b389%7Etplv-k3u1fbpfcp-zoom-in-crop-mark%3A1512%3A0%3A0%3A0.awebp)
+![错误弹框](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/a3d9f5debf154f451f40a9c1ed11fd0b.png)
 
 
 
@@ -247,7 +247,7 @@ Google 在Android 11引入了AIDL for HALs，旨在代替HIDL原先的作用。�
 
 
 
-![AIDL演变](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/7a5523cc95b7431ba179a21625ba0663.jpeg))
+![AIDL演变](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/7a5523cc95b7431ba179a21625ba0663.jpeg)
 
 
 

@@ -13,8 +13,8 @@ mindmap2: false
 ---
 
 
-
-# alias一键kill进程，并脚本中调用alias
+# Linux alias一键kill进程，脚本调用alias
+> 使用Linux的alias功能，实现一键杀进程，并脚本也能调用。
 
 
 
@@ -66,7 +66,7 @@ mindmap2: false
 
 
 
-强调说明一下2，
+强调说明一下②，
 
 其中用到的`awk`的参数需要用到单引号。alias也可以使用双引号，但是如果用双引号，其中的内容会被转义解释成具体获得的值，而不是命令本身。
 
@@ -107,7 +107,7 @@ func'
 
 ## 问题扩展
 
-关于问题4：
+关于问题④：
 
 假设脚本中想要调用这个alias，该如何设计？
 
@@ -159,3 +159,6 @@ shopt expand_aliases
 kill_process_grep_name bcompare
 ```
 
+
+
+**如果文章对你有用，麻烦简单评论+点赞！新人需要人气值！**
