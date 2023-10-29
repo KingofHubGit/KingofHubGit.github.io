@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: fragment
 title: 如何让VirtualBox虚拟机系统使用Ubuntu主机的USB
 categories: [linux]
 description: some word here
@@ -20,7 +20,7 @@ mindmap2: false
 
 
 
-1. 安装Guest Additions
+## 安装Guest Additions
 
 自行百度安装Guest Additions的方法，最终的效果如下：
 
@@ -28,8 +28,7 @@ mindmap2: false
 
 
 
-
-2. 将用户添加到 vboxusers 组：
+## 将用户添加到 vboxusers 组
 
 安装 VirtualBox 时，它会自动创建一个 vboxsuers 组。
 
@@ -55,9 +54,12 @@ sudo gpasswd --add $USER vboxusers
 
 
 
-3. 最终效果
+## 最终效果
 
 
 
+![image-20231029030107015](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20231029030107015.png)
 
 
+
+![image-20231029152046838](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20231029152046838.png)
