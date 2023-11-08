@@ -16,9 +16,11 @@ mindmap2: false
 
 # ASFP Study
 
-Android studio for platform——史上第一款AOSP开发的IDE （支持java/Kotlin/C++/JNI/Native/Shell）
+史上第一款AOSP开发的IDE （支持Java/Kotlin/C++/Jni/Native/Shell/Python）
 
-简称asfp(爱上富婆)
+类似于Android Studio，可用于开发Android系统源码。
+
+Android studio for platform，简称asfp(爱上富婆)。
 
 
 
@@ -75,17 +77,41 @@ Let's get started!
 
 [https://developer.android.com/studio/platform?hl=zh-cn](https://developer.android.com/studio/platform?hl=zh-cn)
 
-![在这里插入图片描述](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/6661ce941ec8464c8f324f785d8b16c3.png)
+![image-20231108224251683](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20231108224251683.png)
 
 
 
-![640](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/640.png)
+
+
+![image-20231108224330263](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20231108224330263.png)
 
 
 
 目前只支持Ubuntu，会自动识别操作系统类型，如果非Ubuntu会显示不可用。
 
 以我的理解，以后也不会支持Windows，搞android系统开发的都懂。
+
+
+
+如果你不方便下载资源，我已经上传到
+
+网盘：
+
+百度网盘：
+
+```
+链接：https://pan.baidu.com/s/1g82vNLN2jFH3dWrS2gY_Pg?pwd=asfp 
+提取码：asfp
+```
+
+CSDN下载：
+
+[https://download.csdn.net/download/dengtonglong/88516673](https://download.csdn.net/download/dengtonglong/88516673)
+
+
+![image-20231023120651551](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20231023120651551.png)
+
+
 
 
 
@@ -110,19 +136,6 @@ google官方教学视频教程地址： [https://www.bilibili.com/video/BV1U](ht
    
 
 3. 下载 ASfP到Ubuntu。
-
-   需要科学上网，我上传到网盘/CSDN了。
-
-   
-
-   ![image-20231108170148034.png](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20231108170148034.png)
-
-   ```
-   //TODO
-   
-   ```
-
-   
 
 4. 安装 ASfP：
 
@@ -192,7 +205,7 @@ google官方教学视频教程地址： [https://www.bilibili.com/video/BV1U](ht
 
 ### 编译
 
-   第一次加入项目，会自动编译，由于我加入的代码包含一些定制化，还有test目录经常出问题，编译到了99%，大体也算完成了。
+  第一次加入项目，会自动编译，由于我加入的代码包含一些定制化，还有test目录经常出问题，编译到了99%，大体也算完成了。
 
 
 
@@ -214,7 +227,7 @@ including device/mediatek/build/vendorsetup.sh
 
  
 
-**refreshmod**应该很好用！
+**refreshmod**应该很强大！
 
 
 
@@ -233,6 +246,8 @@ frameworks.base.iml
 frameworks.base-gen.iml
 
 源代码产生的文件的目录
+
+
 
 ![image-20231108102839175](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20231108102839175.png)
 
@@ -276,7 +291,7 @@ frameworks.base生成的classes.jar
 
 ## 体验特性
 
- **特性是可以提供便利的**。
+> *特性是可以提供便利的*。
 
 
 
@@ -356,6 +371,10 @@ frameworks.base生成的classes.jar
 
 ![image-20231108105127375](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20231108105127375.png)
 
+![image-20231108095757328](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20231108095757328.png)
+
+
+
 但是支持代码补全，这个已经非常好了。
 
 ![image-20231108175204604](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20231108175204604.png)
@@ -404,7 +423,7 @@ C++也支持scratch
 
 不支持这两个语法，但是检测到修改，会提示让你重编。
 
-![image-20231108095757328](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20231108095757328.png)
+![image-20231108114842773](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20231108114842773.png)
 
 
 
