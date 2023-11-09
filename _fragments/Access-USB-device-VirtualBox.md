@@ -64,7 +64,11 @@ sudo gpasswd --add $USER vboxusers
 
 
 
-要应用更改，请重新启动主机（在我的情况下），或者尝试运行``` sudo systemctl restart virtualbox.service``` 命令来重新启动服务。
+要应用更改，请重新启动主机（在我的情况下），或者尝试运行
+
+``` sudo systemctl restart virtualbox.service``` 
+
+命令来重新启动服务。
 
 
 

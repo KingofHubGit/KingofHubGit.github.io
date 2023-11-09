@@ -14,7 +14,11 @@ mindmap2: false
 
 
 
-#  Ubuntu开机自启动shell脚本
+#  Linux开机自启动shell脚本
+
+众所周知，每次开启Ubuntu，都有一些软件/进程/配置，是默认需要开启的，本文提供一种开启自启动shell脚本的方式。
+
+
 
 ## 配置Startup Applications
 
