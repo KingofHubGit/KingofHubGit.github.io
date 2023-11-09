@@ -1,6 +1,6 @@
 ---
 layout: fragment
-title: Ubuntu开机自启动进程解决方案
+title: Ubuntu开机自启动shell脚本
 categories: [linux]
 description: some word here
 keywords: usb, linux, Ubuntu
@@ -12,7 +12,9 @@ mindmap: false
 mindmap2: false
 ---
 
-#  Ubuntu开机自启动进程解决方案
+
+
+#  Ubuntu开机自启动shell脚本
 
 ## 配置Startup Applications
 
@@ -30,7 +32,7 @@ mindmap2: false
 ldeng@lucas-d:~/.config/autostart$ cat  reboot_startup.sh.desktop 
 [Desktop Entry]
 Type=Application
-Exec=/home/ldeng/Lucas.D/Lucas.D-labs/Protect/AllScript/LucasScript/timer_tasks/reboot_startup.sh
+Exec=/home/XXXX/XXXX/timer_tasks/reboot_startup.sh
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
@@ -48,7 +50,7 @@ Comment=reboot_stratup.sh
 
 
 
-## 编写脚本
+## reboot_startup脚本
 
 
 
@@ -59,15 +61,20 @@ reboot_startup.sh
 
 echo "[startup application]: start task after reboot..."
 
-virtualboxvm --startvm DL-Win10 &
+# 启动虚拟机
+virtualboxvm --startvm DL-Win10 & 
 
 sleep 10;
 
+# 启动终端
 terminator &
 
+# 启动性能监视器
 gnome-system-monitor  &
 
-gedit ~/Workspace/temp/paste.txt &
+# 打开常用文件
+gedit ~/XXXX/temp/paste.txt &
+
 ```
 
 

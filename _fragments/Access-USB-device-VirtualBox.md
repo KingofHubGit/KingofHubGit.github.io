@@ -1,6 +1,6 @@
 ---
 layout: fragment
-title: 如何让VirtualBox虚拟机系统使用Ubuntu主机的USB
+title: 如何让VirtualBox系统使用Ubuntu主机的USB
 categories: [linux]
 description: some word here
 keywords: usb, linux, Ubuntu
@@ -14,7 +14,7 @@ mindmap2: false
 
 
 
-# 如何让VirtualBox虚拟机系统使用Ubuntu主机的USB
+# 如何让VirtualBox系统使用Ubuntu主机的USB
 
 当通过 VirtualBox 尝试不同的操作系统时，访问虚拟机中的 USB 驱动器来传输数据非常有用。
 
@@ -25,6 +25,8 @@ mindmap2: false
 自行百度安装Guest Additions的方法，最终的效果如下：
 
 ![image-20231029003651335](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20231029003651335.png)
+
+
 
 
 
@@ -46,11 +48,23 @@ sudo gpasswd --add $USER vboxusers
 
 ![image-20231029003749391](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20231029003749391.png)
 
-根据你的 Linux 发行版，你也可以使用 sudo usermod -a -G vboxusers $USER 命令来代替。
+根据你的 Linux 发行版，你也可以使用
 
-然后通过 cat /etc/group |grep vboxusers 查看结果。
+ ```sudo usermod -a -G vboxusers $USER```
 
-要应用更改，请重新启动主机（在我的情况下），或者尝试运行 sudo systemctl restart virtualbox.service 命令来重新启动服务。
+ 命令来代替。
+
+
+
+然后通过
+
+``` cat /etc/group |grep vboxusers ```
+
+查看结果。
+
+
+
+要应用更改，请重新启动主机（在我的情况下），或者尝试运行``` sudo systemctl restart virtualbox.service``` 命令来重新启动服务。
 
 
 
@@ -63,3 +77,8 @@ sudo gpasswd --add $USER vboxusers
 
 
 ![image-20231029152046838](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20231029152046838.png)
+
+
+
+这样，Windows虚拟机就可以使用Ubuntu主机系统的USB了。
+
