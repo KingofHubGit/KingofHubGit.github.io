@@ -14,19 +14,13 @@ mindmap2: false
 
 
 
-# Ubuntu开发必备15款应用+4大技巧，根本不需要Windows了
+# Ubuntu必备15款应用+6大技巧，根本不需要Windows了
 
-> 不少从事于AOSP/前后端/AI开发的朋友都在用Ubuntu系统，大部分人反馈桌面系统不如Windows/Mac好用，美观。
+> 不少从事于AOSP/前后端/AI开发的朋友都在用Ubuntu系统，大部分人反馈桌面系统不如Windows/Mac好用，应用不全。
 >
-> 其实Ubuntu也可以很流畅 美观 大气，看看我是怎么装修我的Ubuntu的（附MAC高端风+极客风教程）！
-
-
-
-不少从事于AOSP/前后端/AI开发的朋友都在用Ubuntu系统，大部分人反馈桌面系统不如Windows/Mac好用，美观。
-
-其实Ubuntu也可以很流畅 美观大气，看看我是怎么装修我的Ubuntu的！
-
-Ubuntu都更新到24版本了，不要停留在以前的刻板影响，我以一个AOSP开发者角度，提供我的装修思路。
+> 其实Ubuntu也可以很美观 大气 全面，看看我是怎么装修我的Ubuntu的（附MAC高端风+极客风教程）！
+>
+> Ubuntu都更新到24版本了，不要停留在以前的刻板影响，我以一个AOSP开发者角度，提供我的装修思路。
 
 
 
@@ -276,7 +270,7 @@ notepadqq  notepad++的Linux版本，我喜欢用这个看log
 
 
 
-## Skills（5大技巧）
+## Skills（6大技巧）
 
 ### 技巧一：desktop桌面图标
 
@@ -349,7 +343,9 @@ https://blog.csdn.net/dengtonglong/article/details/134310414
 
 [https://blog.csdn.net/dengtonglong/article/details/133819383](https://blog.csdn.net/dengtonglong/article/details/133819383)
 
-此外还有一个注意的点，alias文件需要做到解耦，这个很关键，方便移植，不然每次都要重新配置。
+此外还有一个注意的点：
+
+> alias文件需要做到解耦，这个很关键，方便移植，不然每次都要重新修改+适配。
 
 
 
@@ -384,7 +380,18 @@ sudo apt install blueman
 
 等系统的一切都已经就位，还有重要的一步就是怎么保存劳动果实。
 
-- 建立Ubuntu的snapshot，保存系统配置
+- 建立Ubuntu的snapshot，用timeshift保存系统配置
+
+  ```
+  sudo apt-add-repository -y ppa:teejee2008/ppa
+  
+  sudo apt update
+  
+  sudo apt install timeshift
+  ```
+
+  
+
 -  使用rsync同步备份重要的代码+数据。
 
 
