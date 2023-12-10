@@ -85,11 +85,11 @@ https://sourceforge.net/p/cunit/discussion/
 
 
 
-## 应用Android
+## 在Android中使用
 
 
 
-### 编写mk/bp文件
+### 编译
 
 
 
