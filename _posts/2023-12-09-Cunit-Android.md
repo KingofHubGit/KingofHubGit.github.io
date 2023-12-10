@@ -14,6 +14,10 @@ mindmap2: false
 
 
 
+![cunit_android](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/cunit_android.png)
+
+
+
 # Android系统中使用Cunit测试C/C++接口
 
 > Cunit是C/C++语言的单元测试框架，但常用于Windows和Linux开发中。
@@ -46,7 +50,7 @@ https://cunit.sourceforge.net/contact.html
 | Curses    | Linux/Unix| 交互式curses窗口| #include "CUnit/CUCurses.h"<br>CU_curses_run_tests();            |
 
 这4种模式最终的测试效果如下：
-https://cunit.sourceforge.net/screenshots.html
+[https://cunit.sourceforge.net/screenshots.html](https://cunit.sourceforge.net/screenshots.html)
 
 | **模式**  | **测试结果呈现**                                       |
 | --------- | -----------------------------------------------------|
@@ -59,29 +63,33 @@ https://cunit.sourceforge.net/screenshots.html
 
 具体的使用文档可以参考如下：
 
-https://cunit.sourceforge.net/documentation.html
+[https://cunit.sourceforge.net/documentation.html](https://cunit.sourceforge.net/documentation.html)
 
-https://cunit.sourceforge.net/doc/index.html
+[https://cunit.sourceforge.net/doc/index.html](https://cunit.sourceforge.net/doc/index.html)
 
 
 
 中文文档：
 
-https://blog.csdn.net/iuices/article/details/115280751
+[https://blog.csdn.net/iuices/article/details/115280751](https://blog.csdn.net/iuices/article/details/115280751)
 
 
 
 测试demo：
 
-https://cunit.sourceforge.net/example.html
+[https://cunit.sourceforge.net/example.html](https://cunit.sourceforge.net/example.html)
+
+
 
 源码下载：
 
-https://sourceforge.net/projects/cunit/
+[https://sourceforge.net/projects/cunit/](https://sourceforge.net/projects/cunit/)
+
+
 
 交流论坛：
 
-https://sourceforge.net/p/cunit/discussion/
+[https://sourceforge.net/p/cunit/discussion/](https://sourceforge.net/p/cunit/discussion/)
 
 
 
@@ -365,7 +373,7 @@ int maxi(int i,int j)
 
 
 
-【三步走】
+【四步走】
 
 - 首先，添加一个成员到类中：
 
@@ -384,6 +392,14 @@ int maxi(int i,int j)
 - 在每个对应的test case中，将对应的字符串保存到结构体：
 
   ![image-20231210174444675](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20231210174444675.png)
+
+
+
+最终的效果如下：
+
+![image-20231210230456313](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20231210230456313.png)
+
+
 
 
 
