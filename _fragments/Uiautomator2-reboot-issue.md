@@ -14,6 +14,8 @@ mindmap2: false
 
 
 
+
+
 # UIautomator2 is valid after the device reboot
 
 ![uiautomator](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/uiautomator.png)
