@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: fragment
 title: uiautomator2 is valid after the device reboot
 categories: [linux, android]
 description: UIautomator2测试的时候，一旦和device端断连，就需要手动重启UIautomator2才能继续测试。本文提供在这种情况下的解决方案。
