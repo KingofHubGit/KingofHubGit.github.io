@@ -18,7 +18,7 @@ mindmap2: false
 
 # Docker-Jenkins提示各种证书错误的解决方案
 
-> 本文主要介绍docker-jenkins安装、简易启用，以及讲述经常遇到的坑。
+> 本文主要介绍docker-jenkins安装、简易启用，以及讲述这个过程遇到的坑，特别是各种证书错误的问题。
 
 
 
@@ -104,7 +104,7 @@ jenkins/jenkins:latest
 
 - 配置ssh
 
-**用户名一定要写jenkins**
+**记住用户名一定要写jenkins**
 
 ![image-20240122154514789](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20240122154514789.png)
 
@@ -112,9 +112,19 @@ jenkins/jenkins:latest
 
 ![image-20240122154630171](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20240122154630171.png)
 
-docker-jenkins里面根本没有一些常用的证书以及内网的证书，需要再启动的时候配置
+docker-jenkins里面根本没有一些常用的证书以及内网的证书。
 
-路径为：
+docker里面的网络环境和本地不一致， 加上--network host
+
+```
+docker run  --network host
+```
+
+
+
+其次，不仅仅是google官方的库，还有功能内部gitlab的证书也提示错误，于是想办法怎么默认安装上证书。
+
+经过努力，终于找到Ubuntu通用的证书路径为：
 
 ```
 /etc/ssl/certs/
@@ -133,4 +143,16 @@ docker run  --network host  --rm -p 8080:8080 -p 50000:50000   \
 ```
 
 
+
+该映射的需要映射，比如docker中没有ping工具，也可以这样：
+
+```
+-v /usr/bin/ping:/usr/bin/ping
+```
+
+
+
+在我看来，如果是公司内部用于开发的docker，需要默认集成如上证书/时区/binary等，而不是让开发者去踩坑。
+
+但考虑本文用的是官方的docker jenkins，所以映射也在所不辞。
 
