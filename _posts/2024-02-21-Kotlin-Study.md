@@ -1,3 +1,17 @@
+---
+layout: post
+title: Kotlin Easy-understanding
+categories: [android]
+description: Kotlin是Jetbrain公司发明的编程语言之一，指在替换java。恰好Google此前和SUN公司因为java闹得打官司，所以Jetbrain机智地将Kotlin推荐给了Google Android。目前来看Kotlin在Android应用开发中起到了不错的效果。
+keywords: android, kotlin
+mermaid: false
+sequence: false
+flow: false
+mathjax: false
+mindmap: false
+mindmap2: false
+---
+
 ![kotlin](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/kotlin.jpg)
 
 # 通俗理解Kotlin及其30大特性
