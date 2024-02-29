@@ -20,7 +20,7 @@ mindmap2: false
 
 ## 前言
 
-> Kotlin是Jetbrain公司发明的编程语言之一，指在替换java。恰好Google此前和SUN公司因为java闹得打官司，所以Jetbrain机智地将Kotlin推荐给了Google Android。目前来看Kotlin在Android应用开发中起到了不错的效果。
+> Kotlin是Jetbrain公司发明的编程语言之一，指在替换java。恰好Google此前和甲骨文公司因为java闹得打官司，所以Jetbrain机智地将Kotlin推荐给了Google Android。目前来看Kotlin在Android应用开发中起到了不错的效果。
 
 
 
