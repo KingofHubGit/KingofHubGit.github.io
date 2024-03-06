@@ -12,11 +12,9 @@ mindmap: false
 mindmap2: false
 ---
 
-
+![jenkins_aosp](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/jenkins_aosp.png)
 
 [TOC]
-
-
 
 # Jenkins-Android源码编译【架构设计】（适用鸿蒙/自动化/多产品/持续迭代）
 
