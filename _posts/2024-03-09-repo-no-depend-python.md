@@ -14,7 +14,7 @@ mindmap2: false
 
 ![repo_bin](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/repo_bin.png)
 
-
+[TOC]
 
 # 定制repo（不再切换python和google源）
 
@@ -280,5 +280,6 @@ source ~/.bashrc
 
 
 如果这篇文章对你有用的话，麻烦留下你的关注，我将持续亮剑干货！
+
 
 
