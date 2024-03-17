@@ -14,9 +14,9 @@ mindmap2: false
 
 ![check_sum](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/check_sum.png)
 
-# 一键批量校验文件完整性（支持Win/Linux）
+# 一键批量校验文件完整性（Win+Linux脚本）
 
-> 在Windows和Linux都有专门计算文件hash的命令，但格式都是[command] [file] [algorithm]，然后输出长串数字。一是无法直接比较文件出结果，二是比较大量文件时，人工对比异常繁琐。本文就是解决此难题。
+> 在Windows和Linux都有专门计算文件hash的命令，但格式都类似于[command] [file] [algorithm]，然后输出长串数字。一是无法直接比较文件出结果，二是比较大量文件时，人工对比异常繁琐。本文就是解决此难题。
 
 
 
