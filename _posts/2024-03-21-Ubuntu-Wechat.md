@@ -16,7 +16,7 @@ mindmap2: false
 
 ![v2-47493c4940b2848237a68238d4b521fe_720w](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/v2-47493c4940b2848237a68238d4b521fe_720w.jpg)
 
-# Ubuntu22.04安装微信Linux版（非Wine版）
+# Ubuntu22.04安装微信Linux版（非Wine版）+中文输入
 
 > Ubuntu下安装微信，一直是开发者痛点问题。微信终于推出了Linux原生版本（内侧版）。
 
@@ -26,9 +26,7 @@ mindmap2: false
 
 我已经将资源上传至：
 
-```
-https://download.csdn.net/download/dengtonglong/89003661
-```
+[https://download.csdn.net/download/dengtonglong/89003661](https://download.csdn.net/download/dengtonglong/89003661)
 
 评论区有网盘的版本。
 

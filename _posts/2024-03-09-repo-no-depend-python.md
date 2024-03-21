@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 定制repo（无需依赖python和google源）
+title: compatible for repo2 and repo3
 categories: [android, repo]
 description: some word here
 keywords: android, repo， devops
