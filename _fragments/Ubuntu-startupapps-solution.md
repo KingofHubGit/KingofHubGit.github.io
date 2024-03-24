@@ -1,6 +1,6 @@
 ---
 layout: fragment
-title: Ubuntu开机自启动shell脚本
+title: How to auto start shell scripts in Ubuntu
 categories: [linux]
 description: some word here
 keywords: usb, linux, Ubuntu

@@ -1,6 +1,6 @@
 ---
 layout: fragment
-title: 如何让VirtualBox系统使用Ubuntu主机的USB
+title: How to share the USB permission to the Windows installed in VirtualBox 
 categories: [linux]
 description: some word here
 keywords: usb, linux, Ubuntu
