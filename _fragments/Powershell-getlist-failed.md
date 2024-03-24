@@ -15,7 +15,7 @@ mindmap2: false
 
 # PowerShell获取文件列表踩坑
 
-> Powershell强大的函数库，确实很方便，但是也有些坑
+> Powershell强大的函数库，确实很方便，但是也有些坑。
 
 
 
@@ -148,7 +148,7 @@ ___________________________________________
 
 - 微信公众号"Lucas-Den"(Lucas.D)
 
-<img src=https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20240324122812628.png width=300 height=300 />
+<img src=https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20240324122812628.png width=180 height=180 />
 
 - 个人主页：[@Lucas.D](https://kingofhubgit.github.io/)
 - GitHub：[@KingofHubGit](https://github.com/KingofHubGit)
