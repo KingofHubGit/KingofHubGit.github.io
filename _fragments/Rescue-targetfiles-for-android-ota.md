@@ -2,7 +2,7 @@
 layout: fragment
 title: How to build the incremental OTA package if target_files missed
 categories: [android, ota]
-description: 差分升级对于基础版本的要求较高，必须是一模一样的时间戳和版本，不然升级的时候会提示hash不匹配。Android系统中如果targetfiles如果丢失了或者再也编译不出来了，怎么编译出正确的差分包呢？
+description: 
 keywords: android, ota
 mermaid: false
 sequence: false
