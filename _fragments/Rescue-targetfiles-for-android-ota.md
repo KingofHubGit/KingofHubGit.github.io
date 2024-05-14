@@ -205,7 +205,7 @@ out/host/linux-86/bin/lpunpack   super_ext4.img  super_ext4/
 
 此时`super_ext4/` 就有了`system.img + vendor.img + product.img`
 
-然后将这不是者一一拷贝：
+然后将这3者一一拷贝：
 
 ```
 cp flash_image/system.img   target_files/IMAGES/
