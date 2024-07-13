@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Launcher3图标布局原理解析
+title: Workflow of Launcher3 Deploy Layout
 categories: [Launcher3, Android]
 description: some word here
 keywords: Launcher3, Android
@@ -18,7 +18,7 @@ mindmap2: false
 
 # Launcher3图标布局原理解析
 
-> Launcher3是Android原生的系统APP，相当于PC的桌面，管理各个应用的启动界面。本文重点讲解图标的布局流程和数据保存方法。
+> Launcher3是Android原生的系统APP，相当于PC的桌面，管理各个应用/小部件/文件夹。本文基于Android13重点讲解图标的布局流程和数据保存方法。
 
 
 
@@ -1755,7 +1755,7 @@ moveItemInDatabase
 
 
 
-## 总结
+## 最后啰嗦几句
 
 - Launcher的布局还算是简单好理解的，核心就是MVP模式。
 - Android系统源码扩展性比较好，把握完整流程，再根据定制需求扣细节即可。
