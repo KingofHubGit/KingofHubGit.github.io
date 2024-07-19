@@ -888,7 +888,7 @@ if (loader == null) {
 3. 获取Android版本
 3. 如果以上都没有，就获取默认的文件名： `partner_default_layout.xml`
 
-![image-20240713093518460](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20240713093518460.png)
+![image-20240713093518460](https://raw.githubusercontent.com/KingofHubGit/ImageFactory/main/Public/image-20240717100830470.png)
 
 创建`Launcher`图标布局的初始数据库： 
 
