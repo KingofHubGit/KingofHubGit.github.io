@@ -16,7 +16,7 @@ mindmap2: false
 
 [TOC]
 
-# DexOpt六种触发流程解析(基于android 13)
+# Android DexOpt七种触发流程解析【原创硬核】
 
 > 众所周知，DexOpt是安卓应用性能优化非常重要的手段，相当于将应用对虚拟机的多层调用直接转化成了arm机器码。Dex优化过和没优化过，效果千差万别。本文深入解析android系统DexOpt机制的触发流程。
 
