@@ -2573,7 +2573,7 @@ public class DexOptExtImpl extends DexOptExt {
 - DexOpt每个Android版本都有比较大的变更了，本文比较适用于Android 13，而Android 14对这一块还有更大的更新
 - DexOpt的触发流程，整体来说流程还是比较清晰，难点在于怎么准备好去调用dex2oat
 - DexOpt对于ART虚拟机运行的性能有很大提升， 核心还是在art虚拟机和dex2oat这块
-- 随着高性能CPU时代的到来，DEX优化几乎默认都做。而Dex优化对于低端平台显示出来的差异就很明显
+- 随着高性能CPU时代的到来，DEX优化几乎默认都做。而Dex优化对于中低端平台显示出来的差异就很明显
 
 
 
