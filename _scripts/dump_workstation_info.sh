@@ -41,11 +41,15 @@ if [ "$CPU_BENCH" == true ]; then
     CPU_MODEL=$(grep -m 1 'model name' /proc/cpuinfo | cut -d: -f2 | xargs)
     CPU_CORES=$(nproc)
     CPU_ARCH=$(uname -m)
+    IP=$(hostname -I | awk '{print $1}')
+    MEMORY_SIZE=$(free -h | grep Mem | awk '{print $2}')
 
     echo "主机型号: $HOST_MODEL"
     echo "主机 SN:   $HOST_SN"
     echo "CPU 型号:  $CPU_MODEL"
     echo "核心总数:  $CPU_CORES Threads ($CPU_ARCH)"
+    echo "IP:       $IP"
+    echo "内存大小:  $MEMORY_SIZE MB"
 
     if [ "$DUMP_ONLY" != true ]; then
           echo "=========================================================="
