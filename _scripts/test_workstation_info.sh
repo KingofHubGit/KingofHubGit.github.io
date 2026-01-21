@@ -6,10 +6,6 @@ if [ "$EUID" -ne 0 ]; then
   exit 1
 fi
 
-CPU_BENCH=true
-DISK_BENCH=true
-DUMP_ONLY=false
-
 case $1 in
   "cpu_bench")
     echo "Running CPU benchmark..."
@@ -26,7 +22,9 @@ case $1 in
     DUMP_ONLY=true
     ;;
   *)
-    echo "Usage: $0 [cpu|dump]"
+    CPU_BENCH=true
+    DISK_BENCH=true
+    DUMP_ONLY=false
     exit 1
     ;;
 esac
