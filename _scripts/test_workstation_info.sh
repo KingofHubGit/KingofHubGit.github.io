@@ -25,7 +25,6 @@ case $1 in
     CPU_BENCH=true
     DISK_BENCH=true
     DUMP_ONLY=false
-    exit 1
     ;;
 esac
 
