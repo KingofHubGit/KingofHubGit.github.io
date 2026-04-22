@@ -284,12 +284,37 @@ sync_potatos_assets() {
 }
 
 init_lucasd_labs_repo() {
+
     if ! has_cmd repo; then
-        log 'missing required command: repo'
+        log 'missing required command: repo, installing...'
+
         if [[ "${IS_TERMUX}" == true ]]; then
-            log 'tip: install with `pkg install repo`'
+            mkdir -p "$HOME/bin"
+
+            if ! curl -fsSL https://storage.googleapis.com/git-repo-downloads/repo -o "$HOME/bin/repo"; then
+                log 'error: failed to download repo'
+                exit 1
+            fi
+
+            chmod a+x "$HOME/bin/repo"
+
+            if [[ ":$PATH:" != *":$HOME/bin:"* ]]; then
+                echo 'export PATH=$HOME/bin:$PATH' >> "$HOME/.bashrc"
+                echo 'export PATH=$HOME/bin:$PATH' >> "$HOME/.zshrc"
+                export PATH="$HOME/bin:$PATH"
+            fi
+
+            # 重新校验
+            if ! has_cmd repo; then
+                log 'error: repo install failed'
+                exit 1
+            fi
+
+            log 'repo installed successfully, continue...'
+        else
+            log 'error: repo not found and auto-install only supported in Termux'
+            exit 1
         fi
-        exit 1
     fi
 
     if [[ "${DRY_RUN}" == true ]]; then
@@ -306,7 +331,28 @@ init_lucasd_labs_repo() {
     log "entered directory: ${LUCASD_LABS_DIR}"
 
     repo init --manifest-url git@github.com:KingofHubGit/lucas_manifests.git -b main -m github.xml --no-repo-verify
+    
+    # ===== Termux 专用 TMP patch =====
+    if [[ "${IS_TERMUX}" == true ]]; then
+        log "patching /tmp -> ~/tmp for Termux repo..."
+
+        mkdir -p "$HOME/tmp"
+
+        REPO_DIR=".repo/repo"
+
+        if [[ -d "$REPO_DIR" ]]; then
+            grep -rl '/tmp' "$REPO_DIR" 2>/dev/null \
+            | xargs -r sed -i 's#/tmp#~/tmp#g'
+        fi
+
+        export TMPDIR="$HOME/tmp"
+
+        log "tmp patch done"
+    fi
+
+    # ===== sync =====
     repo sync
+
     repo start --all main
     log "repo init/sync completed"
 }
