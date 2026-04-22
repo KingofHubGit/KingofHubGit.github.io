@@ -13,6 +13,8 @@ DRY_RUN=false
 ASSET_MODE="copy" # copy|link (link packages/ + tools/)
 INIT_REPO=false
 LUCASD_LABS_DIR="${HOME}/Lucas.D/Lucas.D-labs/"
+IS_TERMUX=false
+HAS_RSYNC=false
 
 log() {
     printf '[install.sh] %s\n' "$*"
@@ -69,6 +71,63 @@ run_cmd() {
     fi
 }
 
+detect_platform() {
+    if [[ -n "${TERMUX_VERSION:-}" ]] || [[ -d "/data/data/com.termux/files/home" ]]; then
+        IS_TERMUX=true
+    fi
+}
+
+has_cmd() {
+    command -v "$1" >/dev/null 2>&1
+}
+
+check_dependencies() {
+    local required_cmds=(cp mkdir grep)
+    local cmd
+
+    for cmd in "${required_cmds[@]}"; do
+        if ! has_cmd "${cmd}"; then
+            log "missing required command: ${cmd}"
+            exit 1
+        fi
+    done
+
+    if has_cmd rsync; then
+        HAS_RSYNC=true
+    else
+        HAS_RSYNC=false
+        if [[ "${IS_TERMUX}" == true ]]; then
+            log "rsync not found, will fallback to cp -a in Termux"
+            log "tip: pkg install rsync"
+        else
+            log "rsync not found, will fallback to cp -a"
+        fi
+    fi
+}
+
+sync_dir() {
+    local src="$1"
+    local dst="$2"
+
+    if [[ "${HAS_RSYNC}" == true ]]; then
+        run_cmd rsync -a "${src}" "${dst}"
+    else
+        run_cmd cp -a "${src}/." "${dst}/"
+    fi
+}
+
+sync_dir_excluding_packages() {
+    local src="$1"
+    local dst="$2"
+
+    if [[ "${HAS_RSYNC}" == true ]]; then
+        run_cmd rsync -a --exclude 'packages/' "${src}" "${dst}"
+    else
+        run_cmd cp -a "${src}/." "${dst}/"
+        run_cmd rm -rf "${dst}/packages"
+    fi
+}
+
 ensure_alias_loader_in_file() {
     local rc_file="$1"
     local snippet=$'if [ -f ~/.bash_aliases ]; then\n    . ~/.bash_aliases\nfi'
@@ -106,7 +165,9 @@ ensure_alias_loader_in_file() {
 ensure_alias_loader_for_non_ubuntu() {
     local rc_files=()
 
-    if [[ "$(uname -s)" == "Darwin" ]]; then
+    if [[ "${IS_TERMUX}" == true ]]; then
+        rc_files=("${HOME}/.bashrc" "${HOME}/.profile")
+    elif [[ "$(uname -s)" == "Darwin" ]]; then
         rc_files=("${HOME}/.zshrc")
     else
         rc_files=("${HOME}/.bashrc" "${HOME}/.zshrc")
@@ -121,7 +182,11 @@ ensure_alias_loader_for_non_ubuntu() {
         return 0
     fi
 
-    if [[ "$(uname -s)" == "Darwin" ]]; then
+    if [[ "${IS_TERMUX}" == true ]]; then
+        # shellcheck disable=SC1090
+        . "${HOME}/.bashrc"
+        log 'sourced ~/.bashrc'
+    elif [[ "$(uname -s)" == "Darwin" ]]; then
         # shellcheck disable=SC1090
         . "${HOME}/.zshrc"
         log 'sourced ~/.zshrc'
@@ -169,9 +234,9 @@ sync_potatos_assets() {
 
     if [[ -d "${POTATOS_SRC}" ]]; then
         if [[ "${ASSET_MODE}" == "link" ]]; then
-            run_cmd rsync -a --exclude 'packages/' "${POTATOS_SRC}" "${POTATOS_DST}"
+            sync_dir_excluding_packages "${POTATOS_SRC}" "${POTATOS_DST}"
         else
-            run_cmd rsync -a "${POTATOS_SRC}" "${POTATOS_DST}"
+            sync_dir "${POTATOS_SRC}" "${POTATOS_DST}"
         fi
         if [[ "${DRY_RUN}" == true ]]; then
             log "would sync ${POTATOS_SRC} -> ${POTATOS_DST}"
@@ -198,7 +263,7 @@ sync_potatos_assets() {
         ensure_symlink "${SCRIPT_DIR}/install.sh" "${POTATOS_DST}install.sh"
     else
         if [[ -d "${TOOLS_SRC}" ]]; then
-            run_cmd rsync -a "${TOOLS_SRC}" "${POTATOS_DST}"
+            sync_dir "${TOOLS_SRC}" "${POTATOS_DST}"
             if [[ "${DRY_RUN}" == true ]]; then
                 log "would sync ${TOOLS_SRC} -> ${POTATOS_DST}"
             else
@@ -209,7 +274,7 @@ sync_potatos_assets() {
         fi
 
         run_cmd mkdir -p "${POTATOS_DST}tools"
-        run_cmd rsync -a "${SCRIPT_DIR}/install.sh" "${POTATOS_DST}tools/"
+        run_cmd cp -a "${SCRIPT_DIR}/install.sh" "${POTATOS_DST}tools/"
         if [[ "${DRY_RUN}" == true ]]; then
             log "would copy ${SCRIPT_DIR}/install.sh -> ${POTATOS_DST}tools/"
         else
@@ -219,6 +284,14 @@ sync_potatos_assets() {
 }
 
 init_lucasd_labs_repo() {
+    if ! has_cmd repo; then
+        log 'missing required command: repo'
+        if [[ "${IS_TERMUX}" == true ]]; then
+            log 'tip: install with `pkg install repo`'
+        fi
+        exit 1
+    fi
+
     if [[ "${DRY_RUN}" == true ]]; then
         log "[dry-run] mkdir -p ${LUCASD_LABS_DIR}"
         log "[dry-run] cd ${LUCASD_LABS_DIR}"
@@ -240,14 +313,24 @@ init_lucasd_labs_repo() {
 
 main() {
     parse_args "$@"
+    detect_platform
+    check_dependencies
 
     if [[ "${DRY_RUN}" == true ]]; then
         log 'running in dry-run mode'
     fi
 
+    if [[ "${INIT_REPO}" == true ]]; then
+        init_lucasd_labs_repo
+        return 0
+    fi
+
     copy_aliases_file
 
-    if [[ -f /etc/os-release ]] && grep -qi '^ID=ubuntu$' /etc/os-release; then
+    if [[ "${IS_TERMUX}" == true ]]; then
+        log 'detected Termux, ensuring rc loader snippets'
+        ensure_alias_loader_for_non_ubuntu
+    elif [[ -f /etc/os-release ]] && grep -qi '^ID=ubuntu$' /etc/os-release; then
         log 'detected Ubuntu, alias file copied only'
     else
         log 'detected non-Ubuntu system, ensuring rc loader snippets'
@@ -255,10 +338,6 @@ main() {
     fi
 
     sync_potatos_assets
-
-    if [[ "${INIT_REPO}" == true ]]; then
-        init_lucasd_labs_repo
-    fi
 
     log 'done'
 }
